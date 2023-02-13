@@ -1,0 +1,68 @@
+\lesson{1}{di 13 Feb 2023 12:00}{Introduction}
+
+
+\begin{itemize}
+    \item Score:
+    \begin{itemize}
+        \item Midterm 30\%
+        \item Final 30\%
+        \item Assignment 30\%
+        \begin{itemize}
+            \item 8 questions a week, assigns at every Wednesday.
+        \end{itemize}
+        \item Attendance 10\%
+        \begin{itemize}
+            \item About 5 times, 60\% Attendance gets all 10\%
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+
+\setcounter{chapter}{6}
+\chapter{Introduction}
+
+\setcounter{section}{1}
+\section{Euler's phi-function}
+Goal: Generalize Fermat's little theorem
+
+\begin{theorem}
+    Let $p$ be a prime and $a$ an integer.
+
+    If $\gcd(a, p) = 1$, then $a^p-1 \equiv 1 \pmod p$
+\end{theorem}
+
+\begin{definition}{}
+    For $n \in N$, 
+    
+    let $\phi(n)$ denotes the number of positive integers not exceeding $n$ that are prime to $n$
+\end{definition}
+\begin{eg}
+    If we put $P_n={1 \leq m \leq n | \gcd(m, n) = 1}$ then $\phi(n) = |P_n|$
+\end{eg}
+
+\begin{remark}
+    This function is usually called the Euler phi-function.
+    Clearly, we have $\phi(1) = 1$
+    Suppose $n > 1$ Then since $\gcd(n, 1) = 1$ and $\gcd(n, n) \neq 1$, we find that $1 \leq \phi(n) \leq n-1$
+\end{remark}
+
+\begin{eg}
+    $P_{30} = {1, 7, 11, 13, 17, 19, 23, 29}$
+    $\Rightarrow \phi(30) = |P_{30}| = 8$
+
+    Note that $n$ is a prime $\Leftrightarrow \phi(n) = n-1$
+\end{eg}
+
+\setcounter{section}{0}
+\section{title}
+\begin{theorem}
+    If $p$ is a prime and $k > 0$, then
+    $\phi(p^k) = p^k - p^{k-1} = p^k (1 - \frac{1}{p})$
+\end{theorem}
+
+
+\begin{explanation}
+    let $1 \leq m \leq p^k$ then $\gcd(m, k) = 1 \Leftrightarrow \gcd(m, p) = 1$
+    there are $p^{k-1}$ integers between $1$ and $p^k$ divisible by $p$
+\end{explanation}
+
