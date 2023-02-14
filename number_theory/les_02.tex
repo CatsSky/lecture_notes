@@ -1,0 +1,206 @@
+\lesson{2}{di 14 Feb 2023 10:00}{}
+
+Goal: Show that $\phi$ is multiplitive, e.g.
+\begin{eg}
+    \[
+        \phi(m, n) = \phi(m) \phi(n)
+        \text{if} \gcd(m, n) = 1
+    \]
+\end{eg}
+
+\begin{lemma}
+    Let $a, b, c$ be integers.
+    Then $\gcd(a, b, c) = 1 \Leftrightarrow \gcd(a, b) = \gcd(b, c) = 1$
+\end{lemma}
+\begin{proof}
+    $\Rightarrow$:
+    Suppose there exists a prime $p$ s.t.
+    \[
+        p | \gcd(a, b)
+    \]
+    Then $p | a$ and $p | b$. But then $p | bc$ and hence $p | \gcd(a, bc) = 1$
+    Thus we must have $\gcd(1, b) = 1$
+    Similiar argument shows that $\gcd(a, c) = 1$
+
+    $\Leftarrow$:
+    Suppose that there exists a prime $p$ s.t. $p | \gcd(a, bc)$
+    Then $p | a$ and $p | b$.
+    Since $p$ is a prime, $p | b$ or $p | c$, say $p | b$
+    But this implies $p | \gcd(a, b) = 1$, hence $p | c$
+    But then $p | \gcd(a, c) = 1$
+    Therefore, we conclude that $\gcd(a, bc) = 1$.
+\end{proof}
+
+\begin{theorem}
+    7.2
+
+    The function $\phi$ is multiplitive
+\end{theorem}
+\begin{proof}
+    Let $m, n \in N$, with $\gcd(m, n) = 1$.
+    Then we need to show $\phi(mn) = \phi(m) \phi(n)$.
+
+    If $m = 1$ or $n = 1$, then since $\phi(1) = 1$,
+    we have $\phi(mn) = \phi(m) \phi(n)$.
+    So we may assume $n > 1$ and $m > 1$
+
+    Let: arrange these integersas followed:
+
+    \[
+        \begin{matrix}
+            1        & 2        & \cdots & r        & \cdots & m      \\
+            m+1      & m+2      & \cdots & m+r      & \cdots & 2m     \\
+            2m+1     & 2m+2     & \cdots & 2m+r     & \cdots & 3m     \\
+            \vdots   & \vdots   &        & \vdots   &        & \vdots \\
+            (n-1)m+1 & (n-1)m+2 & \cdots & (n-1)m+r & \cdots & nm
+        \end{matrix}
+    \]
+
+    By definition, $\phi(mn) =$ the number of entries in this array that are relitively prime to $mn$.
+
+    By lemma, this is the same as the number of integersthat are relitively prime to both $m, n$.
+
+    Since $\gcd(qm+r, m) = \gcd(r, m)$, the numbers in the $r$-th column are relitively prime to $m \leftrightarrow \gcd(r, m) = 1$.
+
+    Thus there are $\phi(m)$ columns containing integers prime to $m$.
+
+    If we can show that for each of these columns, there are $\phi(n)$ integers taht are relitively prime to $n$, then we are done.
+
+    Let $1 \leq r \leq m$ with $\gcd(r, m) = 1$.
+
+    Then the entries of $r$-th column are
+    \[
+        r, m+r, 2m+r, \ldots, (n-1)m+r
+    \]
+    we claim that no two integers in the $r$-th column are conguence modulo $n$. Indeed, if
+    \[
+        hm + r \equiv km+r \pmod{n}
+    \]
+    for $0 \leq h, k \leq n-1$ then
+    \[
+        n | (hm+r) - (km+r) = (h-k)m
+    \]
+    Since $\gcd(n, m) = 1$, we find that
+    \[
+        n | h - k \Rightarrow h - k = 0, \text{ i.e. } h = k
+    \]
+    It follows that
+    \[
+        \{r, m+r, 2m+r, \ldots, (n-1)m+r\} \pmod{n}
+        = \{0, 1, 2, \ldots, n-1\}
+    \]
+    Since $\gcd(qn+l, n) = \gcd(l, n)$, there are $\phi(n)$ integers in $r$-th column that are relitively prime to $n$.
+
+    Therefore, there are total of $\phi(m)\phi(n)$ integers in this array that are relitively prime to both $m, n$.
+\end{proof}
+
+\begin{theorem}
+    7.3
+
+    Let $n > 1$ be an integer with the prime factorization.
+    \[
+        n = \prod_{j=1}^{r}{p_j^{k_j}}
+    \]
+    \hfill $(*)$
+
+    Then $\displaystyle \phi(n) = \prod_{j=1}^{r}{(p_j^{k_j} - p_j^{k_j-1})} = n \prod_{j=1}^{r}{(1-\frac{1}{p_j})}$.
+\end{theorem}
+\begin{proof}
+    Since
+    \[
+        % \begin{array}
+        \prod_{j=1}^{r}(p_j^{k_j} - p_j^{k_j-1}) = \prod_{j=1}^{r}{p_j^{k_j}(1-\frac{1}{p_j})}\\
+        = \prod_{j=1}^{r}{p_j^{k_j}} \prod_{j=1}^{r}(1-\frac{1}{p_j})
+        = n \prod_{j=1}^{r}(1-\frac{1}{p_j})
+        % \end{array}
+    \]
+    it suffices to show that $\phi(n) = \prod_{j=1}^{r}{(p_j^{k_j} - p_j^{k_j-1})}$.
+
+    For this, we use induction on $r$. If $r = 1$, then $n = p^k$ and we have $\phi(n) = \phi(p^k) = p^k - p^{k-1}$ by Theorem 7.1
+
+    Suppose inductively that * holds true for $r$.
+
+    Let $n = \prod_{j=1}^{r}{p_j^{k_j}}$. Put $a = \prod_{j=1}^{r}{p_j^{k_j}}$ and $b = p_{r+1}^{k_r+1}$
+
+    Then $n = ab$ and $\gcd(a, b = 1)$. By Theorem 7.2, Then 7.1, and the induction hypothesis, we get
+    \[
+        \phi(n) = \phi(ab) = \phi(a) \phi(b)
+        = \prod_{j=1}^{r}{(p_j^{k_j} - p_j^{k_j-1})} (p_{r+1}^{k_{r+1}})
+        % need to check again
+        = \prod_{j=1}^{r+1}(p_j^{k_j} - p_j^{k_j-1})
+    \]
+    This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    7.4
+
+    For $n > 2$, $\phi(n)$ is an even integer.
+\end{theorem}
+\begin{proof}
+    If $n$ has an odd prime divisor $p$, then $n = p^k m$ for some $k, m \in \mathbb{N}$
+    with $\gcd(p, m) = 1$.
+
+    By theorem 7.1 and theorem 7.2.
+    \[
+        \phi(n) = \phi(p^k m) = \phi(p^k) \phi(m) = (p^k - p^{k - 1} \phi(m))
+    \]
+
+    Since $p^k - p^{k-1}$ is an even integer, $\phi(n)$ is an even integer
+
+    If there is no such $p$, then $n = 2^k$ for some $k \in \mathbb{N}$.
+    Since $n > 2$, we have $k \geq 2$. By theorem 7.1,
+    \[
+        \phi(n) = \phi(2^k) = 2^k - 2^{k-1} = 2^{k-1}
+    \]
+    is an even integer
+\end{proof}
+
+\begin{corollary}
+    There are $\inf$-many primes.
+\end{corollary}
+\begin{proof}
+    The proof is by contradiction. Suppose these finitely many primes, say $p_1, p_2, \ldots, p_n$.
+    Let
+    \[
+        n = \prod_{j=1}^{r}p_j
+    \]
+
+    We can claim that, if $1 < a \leq n$, then $\gcd(a, n) \neq 1$.
+
+    By the fundamental theorem od arithmetics, there exists prime $q$ s.t. $q | a$.
+    By our assumption, $q$ is one of $p_1, p_2, \dots, p_r$, say $q = p_1$.
+    Since $n = \prod_{j=1}^{r}p_j$, we conclude that $q | \gcd(a, n) \Rightarrow \gcd(a, n) \neq 1$.
+
+    Thus there is only one integer between $1$ and $n$ that is relitively prime, namely $1 \Rightarrow \phi(n) = 1 \Rightarrow n = 1, 2$
+\end{proof}
+
+\setcounter{section}{2}
+\section{Euler's Theorem}
+
+\begin{theorem}
+    7.5
+
+    Let $a, n$ be integers with $n \geq 1$.
+
+    If $\gcd(a, n) = 1$, then $a^\phi(n) \equiv 1 \pmod n$
+
+\end{theorem}
+\begin{remark}
+    If $n = p$ is a prime, then $\phi(n) = \phi(p) = p - 1$, and hence theorem 7.5 becomes $a^{p-1} \equiv 1 \pmod n$
+    which is the content of the Fermat's little theorem.
+
+    Therefore, Euler's theorem is a generalization of Fermat's little theorem.
+\end{remark}
+
+\begin{lemma}
+    Let $a, n$ be integers with $n > 1$ and $\gcd(a, n) = 1$.
+
+    If $a_1, a_2, \dots, a_\phi(n)$ are the positive integers less than $n$ and relatively prime to $n$, then
+    $aa_1, aa_2, \dots, aa_\phi(n)$ are conguent modulo $n$ to $a_1, a_2, \dots, a_\phi(n)$ in same order
+
+    i.e.
+    \[
+        \{aa_1, aa_2, \dots, aa_\phi(n)\} \pmod n = \{a_1, a_2, \dots, a_\phi(n)\}
+    \]
+\end{lemma}
