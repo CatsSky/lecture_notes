@@ -98,10 +98,11 @@ Goal: Show that $\phi$ is multiplitive, e.g.
     7.3
 
     Let $n > 1$ be an integer with the prime factorization.
-    \[
+    \begin{equation}   
+        \tag{*} 
         n = \prod_{j=1}^{r}{p_j^{k_j}}
-    \]
-    \hfill $(*)$
+        \label{eqn:7.3.1}
+    \end{equation}
 
     Then $\displaystyle \phi(n) = \prod_{j=1}^{r}{(p_j^{k_j} - p_j^{k_j-1})} = n \prod_{j=1}^{r}{(1-\frac{1}{p_j})}$.
 \end{theorem}
@@ -118,7 +119,7 @@ Goal: Show that $\phi$ is multiplitive, e.g.
 
     For this, we use induction on $r$. If $r = 1$, then $n = p^k$ and we have $\phi(n) = \phi(p^k) = p^k - p^{k-1}$ by Theorem 7.1
 
-    Suppose inductively that * holds true for $r$.
+    Suppose inductively that~\eqref{eqn:7.3.1} holds true for $r$.
 
     Let $n = \prod_{j=1}^{r}{p_j^{k_j}}$. Put $a = \prod_{j=1}^{r}{p_j^{k_j}}$ and $b = p_{r+1}^{k_r+1}$
 
