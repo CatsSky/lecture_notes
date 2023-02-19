@@ -1,0 +1,264 @@
+\documentclass[12pt]{exam}
+\usepackage{amsthm}
+\usepackage{libertine}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage{cleveref}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{siunitx}
+\usepackage{cancel}
+% \usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{tikz}
+% \usepackage[usenames,dvipsnames]{xcolor}
+
+
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+% \tikzexternalize
+
+\newcommand{\class}{Number Theory} % This is the name of the course 
+\newcommand{\examnum}{Homework 7.2} % This is the name of the assignment
+\newcommand{\examdate}{17 Feb. 2023} % This is the due date
+\newcommand{\timelimit}{}
+
+\makeatother
+\usepackage{thmtools}
+\usepackage[framemethod=tikz]{mdframed}
+\definecolor{NavyBlue}{RGB}{0, 0, 128}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{NavyBlue!70!black}, bodyfont=\normalfont,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=NavyBlue, backgroundcolor=NavyBlue!5,
+    }
+]{thmbluebox}
+\declaretheorem[style=thmbluebox, numbered=no, name=Answer]{answer}
+
+
+\begin{document}
+\pagestyle{plain}
+\thispagestyle{empty}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+    \textbf{\class} & \textbf{Name:} & \textit{Pohan Lin}\\ %Your name here instead, obviously 
+    \textbf{\examnum} &&\\
+    \textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+% ---
+7.2: 1, 2, 3, 5, 8, 11, 13, 16.
+
+\begin{enumerate}
+    \item Calculate $\phi(1001)$, $\phi(5040)$, and $\phi(36,000)$.
+          \begin{answer}
+              \[
+                  \begin{aligned}
+                      1001        & = 7 \cdot 11 \cdot 13                                                    \\
+                      \phi(1001)  & = 1001 (1-\frac{1}{7}) (1-\frac{1}{11}) (1-\frac{1}{13})                 \\
+                                  & = 720                                                                    \\
+                      \\
+                      5040        & = 2^4 \cdot 3^2 \cdot 5 \cdot 7                                          \\
+                      \phi(5040)  & = 5040 (1-\frac{1}{2}) (1-\frac{1}{3}) (1-\frac{1}{5}) (1-\frac{1}{7}) s \\
+                                  & = 1152                                                                   \\
+                      \\
+                      36000       & = 2^5 \cdot 3^2 \cdot 5^3                                                \\
+                      \phi(36000) & = 36000 (1-\frac{1}{2}) (1-\frac{1}{3}) (1-\frac{1}{5})                  \\
+                                  & = 9600                                                                   \\
+                  \end{aligned}
+              \]
+          \end{answer}
+
+    \item Verify that the equality $\phi(n) = \phi(n + 1) = \phi(n + 2)$ holds when $n = 5186$.
+
+          \begin{answer}
+              \begin{equation}
+                  \tag{1}
+                  \begin{aligned}
+                      \phi(n) & = \phi(5186)                                               \\
+                              & = \phi(2 \cdot 2593)                                       \\
+                              & = 5186 \cdot (1 - \frac{1}{2}) (1 - \frac{1}{2593}) = 2592 \\
+                  \end{aligned}
+                  \label{eqn:2.1}
+              \end{equation}
+
+              \begin{equation}
+                  \tag{2}
+                  \begin{aligned}
+                      \phi(n+1) & = \phi(5187)                                                                    \\
+                                & = \phi(3 \cdot 7 \cdot 13 \cdot 19)                                             \\
+                                & = 5187 (1-\frac{1}{3}) (1-\frac{1}{7}) (1-\frac{1}{13}) (1-\frac{1}{19}) = 2592 \\
+                  \end{aligned}
+                  \label{eqn:2.2}
+              \end{equation}
+
+              \begin{equation}
+                  \tag{3}
+                  \begin{aligned}
+                      \phi(n+2) & = \phi(5188)                                     \\
+                                & = \phi(2^2 \cdot 1297)                           \\
+                                & = 5188 (1-\frac{1}{2}) (1-\frac{1}{1297}) = 2592
+                  \end{aligned}
+                  \label{eqn:2.3}
+              \end{equation}
+
+              From~(1),~(2),~(3), we can conclude that when $n = 5186$, $\phi(n) = \phi(n+1) = \phi(n+2)$ holds true.
+
+          \end{answer}
+
+
+    \item Show that the integers $m = 3^k \cdot 568$ and $n = 3^k \cdot 638$, where $k \geq 0$, satisfy
+          simultaneously
+          \[
+              \tau(m) = \tau(n),\quad \sigma(m) = \sigma(n),\text{and} \quad \phi(m) = \phi(n)
+          \]
+          \begin{answer}
+              \[
+                  \begin{aligned}
+                      m & = 3^k \cdot 2^3 \cdot 71        \\
+                      n & = 3^k \cdot 2 \cdot 11 \cdot 29 \\
+                  \end{aligned}
+              \]
+
+              \[
+                  \begin{aligned}
+                      \tau(m)   & = \tau(3^k)\tau(2^3)\tau(71)                           \\
+                                & = \tau(3^k) \cdot 4 \cdot 2                            \\
+                                & = \tau(3^k) \cdot 2 \cdot 2 \cdot 2                    \\
+                                & = \tau(3^k)\tau(2)\tau(11)\tau(29) = \tau(n)           \\
+                      \sigma(m) & = \sigma(3^k)\sigma(2^3)\sigma(71)                     \\
+                                & = \sigma(3^k) \cdot 15 \cdot 72                        \\
+                                & = \sigma(3^k) \cdot 2^3 \cdot 3^3 \cdot 5              \\
+                                & = \sigma(3^k) \cdot 3 \cdot 12 \cdot 30                \\
+                                & = \sigma(3^k)\sigma(2)\sigma(11)\sigma(29) = \sigma(n) \\
+                      \phi(m)   & = \phi(3^k)\phi(2^3)\phi(71)                           \\
+                                & = \phi(3^k) \cdot 4 \cdot 70                           \\
+                                & = \phi(3^k) \cdot 2^3 \cdot 5 \cdot 7                  \\
+                                & = \phi(3^k) \cdot 1 \cdot 10 \cdot 28                  \\
+                                & = \phi(3^k)\phi(2)\phi(11)\phi(29) = \phi(n)           \\
+                      % Induction
+                      % &m_0 = 2^3 \cdot 71 \\
+                      % &n_0 = 2 \cdot 11 \cdot 29 \\
+                      % &\tau(m_0) = (3+1) \cdot (1+1) = 8 \\
+                      % &\tau(n_0) = (1+1) \cdot (1+1) \cdot (1+1) = 8 \\
+                      % &\sigma(m_0) = \sum{\{1, 2, 4, 8, 71, 142, 284, 568\}} = 1080 \\
+                      % &\sigma(n_0) = \sum{\{1, 2, 11, 22, 29, 58, 319, 637\}} = 1080 \\
+                      % ...
+                  \end{aligned}
+              \]
+          \end{answer}
+
+          \setcounter{enumi}{4}
+    \item Prove that the equation $\phi(n) = \phi(n + 2)$ is satisfied by $n = 2(2 p - 1)$ whenever $p$ and
+          $2 p - 1$ are both odd primes.
+          \begin{answer}
+              \[
+                  \begin{aligned}
+                      \phi(n + 2) & = \phi(2(2p-1)+2)             \\
+                                  & = \phi(4p)                    \\
+                                  & = \phi(4)\phi(p)              \\
+                                  & = 2\cdot(p-1)                 \\
+                                  & = 1\cdot(2p - 2)              \\
+                                  & = \phi(2)\phi(2p-1) = \phi(n) \\
+                  \end{aligned}
+              \]
+          \end{answer}
+
+          \setcounter{enumi}{7}
+    \item Prove that if the integer $n$ has $r$ distinct odd prime factors, then $2^r | \phi(n)$.
+          \begin{answer}
+              Since $n$ has $r$ distinct odd prime factors, we can write $n$ as followed
+              \[
+                  \begin{aligned}
+                      n = 2^{k_0} p^{k_1}_1 \dots p^{k_r}_r
+                  \end{aligned}
+              \]
+              where $k_i \in \mathbb{Z}$ for $i > 0$.
+              \[
+                  \begin{aligned}
+                      \Rightarrow\phi(n) & = \phi(2^{k_0}) \phi(p^{k_1}_1) \dots \phi(p^{k_r}_r)                                 \\
+                                         & = (\phi(2^{k_0}) \phi(p^{k_1-1}_1) \dots \phi(p^{k_r-1}_r)) \cdot (p_1-1)\dots(p_r-1)
+                  \end{aligned}
+              \]
+              Each of the last $r$-terms is divisible by 2 since $p_1 \dots p_r$ are odd primes. \\
+              Hence $2^r | \phi(n)$ holds true.
+          \end{answer}
+
+          \setcounter{enumi}{10}
+    \item \begin{enumerate}
+              \item If $\phi(n) | n - 1$, prove that $n$ is a square-free integer.\newline
+                    [Hint: Assume that $n$ has the prime factorization $n = p_1^{k_1}p_2^{k_2} \dots p_r^{k_r}$,
+                    where $k_1 \geq 2$.
+                    Then $p_1 | \phi(n)$, whence $p_1 | n - 1$, which leads to a contradiction.]
+                    \begin{answer}
+                        Assume the contrary of the premise is true, that $n$ is not square-free.
+                        Then $n = p^{k_1}_1 p^{k_2}_2 \dots p^{k_r}_r$ will have at least one prime factor with exponent greater than $1$.
+
+                        Without loss of generality, let that be $p_1$. We then would have
+                        \[
+                            \begin{aligned}
+                                \phi(n) & = \phi(p^{k_1}_1) \phi(p^{k_2}_2) \dots \phi(p^{k_r}_r)             \\
+                                        & = p^{k_1-1}_1 (p_1 - 1) \cdot \phi(p^{k_2}_2) \dots \phi(p^{k_r}_r)
+                            \end{aligned}
+                        \]
+                        The above shows that $p_1 | \phi(n) \Rightarrow p_1 | n-1$.\\
+                        This contradict the fact that $p_1$ is a divisor of $n$ and $\gcd(n, n-1) = 1$.\\
+                        Thus $n$ must be  a square-free integer.
+                    \end{answer}
+
+              \item Show that if $n = 2^k$ or $2^k 3^j$, with $k$ and $j$ positive integers, then $\phi(n) | n$.
+                    \begin{answer}
+                        Suppose that $n = 2^k$, then $\phi(n) = \phi(2^k) = 2^{k-1}$, which divides $n$.\\
+                        Suppose that $n = 2^k3^j$ where $k, j \in \mathbb{Z}$, then
+                        \[
+                            \phi(n) = \phi(2^k)\phi(3^j) = 2^{k-1} 3^{j-1}
+                        \]
+                        which divides $n$.
+                    \end{answer}
+
+          \end{enumerate}
+
+          \setcounter{enumi}{12}
+    \item Assuming that $d | n$, prove that $\phi(d) | \phi(n)$.\newline
+          [Hint: Work with the prime factorizations of $d$ and $n$.]
+          \begin{answer}
+              Let $n = p^{k_1}_1 p^{k_2}_2 \dots p^{k_r}_r$ be the prime factorization of $n$.
+              Then we can represent every divisor of $n$ as $d = p^{j_1}_1 p^{j_2}_2 \dots p^{j_r}_r$, where $0 \geq j_i \geq k_i$ for $i = 1, 2, \dots, r$.
+
+              From the above we now have
+              \[
+                  \phi(p^j) = p^{j-1}(p-1) \;|\; p^{k-1}(p-1) = \phi(p^k)
+              \]
+              Since the phi-function is multiplicative
+              \[
+                  \phi(d) = \phi(p^{j_1}_1) \phi(p^{j_2}_2) \dots \phi(p^{j_r}_r) \;|\; \phi(p^{k_1}_1) \phi(p^{k_2}_2) \dots \phi(p^{k_r}_r) = \phi(n)
+              \]
+          \end{answer}
+
+          \setcounter{enumi}{15}
+    \item Show that the Goldbach conjecture implies that for each even integer $2n$ there exist
+          integers $n_1$ and $n_2$ with $\phi(n_1) + \phi(n_2) = 2n$.
+          \begin{answer}
+              Goldbach conjecture says that for each positive even integer greater
+              than $2$ can be composed as the sum of two prime numbers.
+
+              Let $n_1, n_2$ be two prime numbers s.t. $n_1 + n_2 = 2(n + 1)$, where $n \in \mathbb{Z}$.
+              Then we have
+              \[
+                  \phi(n_1) + \phi(n_2) = (n_1 - 1) + (n_2 - 1) = 2n
+              \]
+              which solves the problem.
+          \end{answer}
+
+\end{enumerate}
+
+\end{document}
