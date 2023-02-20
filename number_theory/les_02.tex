@@ -194,14 +194,105 @@ Goal: Show that $\phi$ is multiplitive, e.g.
     Therefore, Euler's theorem is a generalization of Fermat's little theorem.
 \end{remark}
 
+\subsection*{Goal: Prove Euler's Theorem}
 \begin{lemma}
     Let $a, n$ be integers with $n > 1$ and $\gcd(a, n) = 1$.
 
-    If $a_1, a_2, \dots, a_\phi(n)$ are the positive integers less than $n$ and relatively prime to $n$, then
-    $aa_1, aa_2, \dots, aa_\phi(n)$ are conguent modulo $n$ to \\ $a_1, a_2, \dots, a_\phi(n)$ in same order
+    If $a_1, a_2, \dots, a_{\phi(n)}$ are the positive integers less than $n$ and relatively prime to $n$, then
+    $aa_1, aa_2, \dots, aa_{\phi(n)}$ are conguent modulo $n$ to \\ $a_1, a_2, \dots, a_{\phi(n)}$ in same order
 
     i.e.
     \[
-        \{aa_1, aa_2, \dots, aa_\phi(n)\} \pmod n = \{a_1, a_2, \dots, a_\phi(n)\}
+        \tag*{*}
+        \{aa_1, aa_2, \dots, aa_{\phi(n)}\} \pmod n = \{a_1, a_2, \dots, a_{\phi(n)}\}
+        \label{eqn:7.5.1}
     \]
 \end{lemma}
+\begin{proof}
+    Let $1 \leq i \leq \phi(n)$. Let $1 \leq b_i < n$ be the remainder of $aa_i$
+    divided by $n$.
+
+    We want to show that $\exists! \; 1 \leq j \leq \phi(n)$ s.t. $b_i = a_j$.
+
+    For this, we prove~\eqref{eqn:7.5.1}. We first show that all $b_i$ are distinct, Suppose there exist
+    $1 \leq i, j \leq \phi(n)$ s.t. $b_i = b_j$.
+
+    By definition, we have $aa_i \equiv b_i \equiv b_j \equiv aa_j \pmod n$.
+
+    This implies $n | aa_i -aa_j = a(a_i - a_j)$.
+    Since $\gcd(a, n) = 1$, we have $n | a_i - a_j$.
+    Since $1 \leq a_i, a_j \leq n$, $|a_i - a_j| \leq n - 1$.
+
+    Therefore $n|a_i - a_j \Rightarrow a_i = a_j$, i.e. $i = j$.
+
+    To complete the proof, we check that $\gcd(b_i, n) = 1$ for $1 \leq i \leq \phi(n)$.
+    Suppose there exist $1 \leq i \leq \phi(n)$ and $a \; \text{prime}\; p$ a.t.
+    $p | \gcd(b_i, n)$. By definition, there exists $q \in \Z$ s.t.
+    $aa_i = nq + b_i$. 
+    
+    Since $p|\gcd()b_i, n$, we have $p | b_i$ and $p | n$. 
+    This implies $p | aa_i$ and hence $p | a$ or $p | a_i$.
+    
+    If $p | a$, then since $p | n$, we get $p | \gcd(n, a) = 1$.
+
+    If $p | a_i$, then since $p | n$, we find $p | \gcd(n, a_i) = 1$.
+
+    Therefore we must have $\gcd(b_i, n) = 1$ for all $1 \leq i \leq \phi(n)$
+\end{proof}
+\begin{eg}
+    Let $n = 9$. 
+    
+    Then positive integers less than are relatively prime to $9$ are $1, 2, 4, 5, 7, 8$
+    These integers play the role of the integers $a_1, a_2, \dots, a_{\phi(n)}$ in the lemma.
+
+    If $a = -4$, then the integers $aa_i$ are $-4, -8, -16, -20, -28, -32$.
+
+    Where modulo $9$, 
+    \[  
+        \{-4, -8, -16, -20, -28, -32\} \equiv \{5, 1, 2, 7, 8, 4\} \pmod 9
+    \]
+
+    Therefore,
+    \[
+        \begin{aligned}
+            &(-4)\cdot(-8)\cdot(-16)\cdot(-20)\cdot(-28)\cdot (-32) \equiv 1\cdot2\cdot4\cdot5\cdot7\cdot8 \pmod 9 \\
+            &\Rightarrow (-4\cdot1)\cdot(-4\cdot2)\cdot(-4\cdot4)\cdot(-4\cdot7)\cdot(-4\cdot8) = \\ 
+            &(-4)^6\cdot(1\cdot2\cdot4\cdot5\cdot7\cdot8) \equiv 1\cdot2\cdot4\cdot5\cdot7\cdot8 \pmod 9 \\
+            &\Rightarrow 9 | [(-4)^6 - 1]\cdot (1\cdot2\cdot4\cdot5\cdot7\cdot8) \\
+            &\Rightarrow 9 | (-4)^6 - 1 \; \text{,i.e.} \; (-4)^6 \equiv 1 \pmod 9 \\
+        \end{aligned}
+    \]
+\end{eg}
+
+\begin{theorem} 7.5
+
+    Let $a, n \in \N$ with $\gcd(a, n) = 1$.
+    Then
+    \[
+        a^{\phi(n)} \equiv 1 \pmod n
+    \]
+\end{theorem}
+\begin{proof} 7.5
+    
+    We may assume that $n > 1$ as Theorem 7.5 holds trivially when $n = 1$.
+
+    Let $a_1, \dots, a_{\phi(n)}$ be positive integers less than and relitively prime to $n$.
+
+    Since $\gcd(a, n = 1$), lemma implies $aa_1, \dots, aa_{\phi(n)}$ are conguent to
+    $a_1, \dots, a_{\phi(n)}$ modulo $n$, in same order.
+
+    Therefore, we have
+    \[
+        \begin{aligned}
+            &aa_1 \cdot aa_2 \dots aa_{\phi(n)} \equiv a_1a_2\dots a_{phi(n)} \pmod n \\
+            &\Rightarrow a^{\phi(n)}(a_1a_2\dots a_{\phi(n)}) \equiv a_1a_2\dots a_{\phi(n)} \pmod n \\
+            &\Rightarrow n \;|\; (a^{\phi(n)} - 1)\cdot(a_1a_2\dots a_{\phi(n)})
+        \end{aligned}
+    \]
+
+    Since $\gcd(n, a_i) = 1$ for $1 \leq i \leq \phi(n)$, we have $\gcd(n, a_1a_2\dots a_{\phi(n)}) = 1$.
+
+    And hence $n | a^{\phi(n)} - 1$, i.e. $a^{\phi(n)} \equiv 1 \pmod n$.
+
+
+\end{proof}
