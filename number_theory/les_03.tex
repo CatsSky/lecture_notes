@@ -1,4 +1,266 @@
 \lesson{3}{di 20 Feb 2023 12:00}{}
 
 
+\begin{theorem}
+    Euler's Theorem 
 
+    $a, n \in \Z$ with $n \geq 1$ and $\gcd(a, n) = 1$.
+
+    Then $a^{\phi(n)} \equiv 1 \pmod n$.
+\end{theorem}
+\begin{proof}
+    Another proof of Euler's Theorem.
+    Ingredients:
+    \begin{itemize}
+        \item Fermat's little theorem
+        \item Binomial theorem
+        \item Formula of $\phi(n)$
+    \end{itemize}
+
+    Let $p$ be a prime and $k \in \N$.
+    We prove by induction on $k$ that
+    \[
+        \tag{1}
+        a^{\phi(n)} \equiv 1 \pmod n
+        \label{eqn:e1}
+    \]
+    When $k = 1$, $\phi(p^k) = \phi(p) = p - 1$. Then~\eqref{eqn:e1} is
+    a content of Fermat's little theorem.
+
+    Assume that~\eqref{eqn:e1} holds for a fixed $k$.
+
+    Then we can write $a^{\phi(p^k)} = 1 + qp^k$ for some $q \in \Z$.
+    Since $\phi(p^{k+1}) = p^{k+1} - p^k = p(p^k - p^{k-1}) = p \phi(p^k)$.
+    the binomial theorem implies
+    \[
+        a^{\phi(p^{k+1})} = a^{p\phi(p^k)} = {[a^{\phi(p^k)}]}^p = {(1+qp^k)}^p
+        = \sum_{r=0}^{p}{
+            \left(
+                \begin{array}{c}
+                    p \\
+                    r
+                \end{array}
+            \right)
+            (qp)
+        }
+    \]
+
+    Now let $n \in \N$. We may assume $n > 1$.
+    Then $n = \prod_{j=1}^{r}{p_{j}^{k_j}}$ where $p_1 < \cdots < p_r$ are
+    primes and $k_1, \dots, k_r \in \N$.
+
+    Since $\gcd(a, n) = 1$, we see that $\gcd(a, p_j) = 1$ for $1 \leq j \leq r$.
+
+    Hence by~\eqref{eqn:e1}, we have 
+    \[
+        a^{\phi(p_i^{k_i})} \equiv 1 \pmod {p_i^{k_i}}
+    \]
+    for all $1 \leq i \leq r$.
+    Since $\phi(n) = \prod_{j=1}^{r}{\phi(p_j^{k_j})}$, we see that
+    $\frac{\phi(n)}{\phi(p_i^{k_i})} \in \N$
+
+    Now 
+    \[
+        \begin{aligned}
+            a^{\phi(n)} &= {[a^{\phi(p_i^{k_i})}]}^\frac{\phi(n)}{\phi(p_i^{k_i})} \\
+            &\equiv 1^\frac{\phi(n)}{\phi(p_i^{k_i})} \pmod p_i^{k_i} \\
+            &\equiv 1 \pmod p_i^{k_i}
+        \end{aligned}
+    \]
+    for $1 \leq i \lq r \Rightarrow p_i^{k_i} | a^{\phi(n)} - 1, \forall i$.
+
+    This implies
+    \[
+        \begin{aligned}
+            n = \prod_{j=1}^{r}{p_j^{k_j}} | a^{\phi(n)} - 1 \\
+            \text{i.e. } a^{\phi(n)} \equiv 1 \pmod n
+        \end{aligned}
+    \]
+\end{proof}
+
+\begin{eg}
+    Application of Euler's Theorem
+
+    \begin{enumerate}
+        \item Let's find the last two digit in the decimal representation of $3^{256}$,
+        i.e.\ we want to find $3^{256} \equiv r \pmod {100}$
+
+        Since $\gcd(3, 100) = 1$ and $\phi(100) = \phi(2^2 5^2) = 40$
+
+        Euler's theorem implies 
+        \[
+            3^{40} \equiv 40 \pmod {100}
+        \]
+        Since $256 = 40\cdot6+16$, we find that
+        \[
+            3^{256} = 3^{40\cdot6+16}=3^{16}\cdot{(3^{40})}^6 \equiv 3^{16} \pmod {100}
+        \]
+
+        To compute $3^{16}\pmod{100}$, we use the method of succesive squaring:
+        \[
+            \begin{aligned}
+                &3^2 \equiv 9 \pmod{100} \\
+                &3^4={(3^2)}^2\equiv9^2\equiv81\pmod{100} \\
+                &3^8={(3^4)}^2\equiv81^2\equiv61\pmod{100} \\
+                &3^{16}={(3^8)}^2\equiv61^2\equiv21\pmod{100}
+            \end{aligned}
+        \]
+        thus $r = 21$.
+
+        \item Let $n \in \N$ with $\gcd(n, 10) = 1$.
+        Then we show that $n$ divides an integer whose digits are all equal to 1.
+
+        (e.g. $n|11111$)
+
+        Since $\gcd(n, 10) = 1$ and $\gcd(9, 10) = 1$,
+        we have $\gcd(9n, 10) = 1$, By Euler's Theorem,
+        \[
+            10^{\phi(9n)} \equiv 1 \pmod{9n}
+        \]
+        This implies there exists $k \in \N$ s.t.
+        \[
+            \begin{aligned}
+                10^{\phi(9n)} = 1 + 9nk &\Rightarrow nk = \frac{10^{\phi(9n)} - 1}{9} \\
+                &\Rightarrow n | \frac{10^{\phi(9n)}-1}{9}
+            \end{aligned}
+        \]
+
+        \item Recall the Chinese Remainder Theorem:
+        
+        Let $n_1, \dots, n_r$ be pairwise relatively prime positive integers. 
+        Then the linear conguences
+        \[
+            \tag{*}
+            x \equiv a_1 \pmod{n_1}, \dots, x \equiv a_r \pmod{n_r}
+            \label{eqn:e2}
+        \]
+        has a unique solution modulo $n = n_1 n_2 \dots n_r$.
+        Here we give another proof by using Euler's Theorem.
+
+        For $1 \leq i \leq r$, let $N_i = \frac{n}{n_i}$. 
+        
+        Then we have $\gcd(N_i, n_i) = 1$ and 
+        $N_i \equiv 0 \pmod{n_j}$ for $1 \leq i \neq j \leq r$.
+        Let
+        \[
+            \begin{aligned}
+                a &= \sum_{i=1}^{r}{a_i N_i^{\phi(n_i)}} \\
+                &= a_1 N_1^{\phi(n_1)} + \cdots + a_1 N_r^{\phi(n_r)}
+            \end{aligned}
+        \]
+
+        We claim that $a$ is a solution of~\eqref{eqn:e2}.
+
+        Let $1 \leq j \leq r$. Then since $\gcd(n_j, N_j) = 1$, Euler's Theorem implies
+        \[
+            N_j^{\phi(n_j)} \equiv 1 \pmod{n_j}
+        \]
+        On the other hand, for $1 \leq i \neq j \leq r$, we have
+        \[
+            N_i^{\phi(n_i)} \equiv 0 \pmod{n_j}
+        \]
+
+        Therefore,
+        \[
+            \begin{aligned}
+                a = a_j N-J^{\phi(n_j)} + \sum_{i \neq j}^{}{a_i N_i^{\phi(n_i)}} &\equiv a_j \cdot 1 + 0 \pmod{n_j} \\
+                &\equiv a_j \pmod n_j
+            \end{aligned}
+        \]
+    \end{enumerate}
+\end{eg}
+
+\section{Some Properties of the phi-function}
+
+\begin{theorem}
+    7.6 Gauss.
+
+    Let $n \in \Z$. Then $n = \sum_{d | n}^{}\phi(d)$.
+\end{theorem}
+\begin{proof}
+    Let $d \in Z$ e a divisor of $n$. Consider the set
+    \[
+        S_d = \{ 1 \leq m \leq n | \gcd(m, n) = d \}
+    \]
+    We claim $|S_d| = \phi(\frac{n}{d})$. For this, recall that
+    \[
+        \gcd(m, n) = d \iff \gcd(\frac{m}{d}, \frac{n}{d}) = 1
+    \]
+    Therefore $S_d = \{ dk | 1 \leq k \leq \frac{n}{d}, \gcd(k, \frac{n}{d}) = 1 \}$.\newline
+    This implies $|S_d| = \phi(\frac{n}{d})$.
+
+    Next, noting that
+    \[
+        \{ 1, 2, \dots, n \} = \cup_{d | n} S_d {\And} S_d \cap S_{d\prime} = \O \text{ if } d\neq d\prime
+    \]
+
+    Indeed, if $S_d \cap S_{d\prime} \neq \O$, say $m \in S_d \cap S_{d\prime}$, then
+    $d = \gcd(m, n) = d\prime$.
+
+    On the other hand, let $m \in \{1, 2, \dots, n\}$ and $d\prime = \gcd(m, n)$.
+    Then $m \in S_{d\prime}$ and hence $\{1, 2, \dots, n\} \subseteq \cup_{d | n}S_d$.
+
+    Now implies
+    \[
+        \begin{aligned}
+            &| \{ 1, 2, \dots, n \} | = \sum_{d | n}{ |S_d| } \\
+            \Rightarrow &n = \sum_{d|n}^{}{\phi(\frac{n}{d})} = \sum_{d|n}^{}{\phi(d)}
+        \end{aligned}
+    \]
+\end{proof}
+
+\begin{theorem}
+    7.7
+
+    For $n > 1$, the sum of the positive integers less than 
+    and relatively prime to n is $\frac{1}{2}n\phi(n)$.
+\end{theorem}
+\begin{proof}
+    Let $m = \phi(n)$ and $a_1, a_2, \dots, a_m$ be the integers less than and relitively prime to n.
+    Note that
+    \[
+        \gcd(n, a) = 1 \iff \gcd(n, n-a) = 1
+    \]
+    Thus we see that $\gcd(n, n-a_j) = 1, \forall 1 \leq j \leq r$.
+    Since $1 \leq n-a_j \leq n$ for $1 \leq j \leq m$ and they are all distinct, we find that
+    \[
+        \{ a_1, \dots, a_m \} = \{ n-a_1, n-a_2, \dots, n-a_m \}
+    \]
+
+    Therefore,
+    \[
+        \begin{aligned}
+            2\sum_{i=1}^{m}{a_i} &= \sum_{i=1}^{m}a_i + \sum_{i=1}^{m}a_i \\
+            &= \sum_{i=1}^{m}a_i + \sum_{i=1}^{m}{n-a_i} \\
+            &= \sum_{i=1}^{m}{a_i + n - a_i} \\
+            &= m \cdot n \\
+            &= n \cdot \phi(n)
+        \end{aligned}
+    \]
+    And hence $\sum_{i=1}^{m}a_i = \frac{1}{2}n\phi(n)$.
+\end{proof}
+
+\begin{note}
+    Recall the Mobius $\mu$-function:
+    \[
+        \mu(n) = \begin{cases}
+            1 &\text{if } n = 1\\
+            0 &\text{if } p^2 | n \text{ for some prime } p\\
+            {(-1)}^r &\text{if } n = p_1 \cdots p_r \text{ where } p_1 < p_2 < \cdots p_r \text{ are primes}\\
+        \end{cases}
+    \]
+
+    Recall that if $f(n)$ is a number-theoretic function, \newline
+    and $F(n) = \sum_{d|n}^{}{f(d)}$,\newline
+    then the Mobius inversion formula says
+    \[
+        f(n) = \sum_{d|n}^{}{\mu(d)F(\frac{n}{d})} = \sum_{d|n}^{}{\mu(\frac{n}{d}F(d))}
+    \]
+\end{note}
+
+\begin{theorem}
+    7.8
+    \[
+        \phi(n) = n \sum_{d|n}{\frac{\mu(d)}{d}}, \forall n \in \N
+    \]
+\end{theorem}

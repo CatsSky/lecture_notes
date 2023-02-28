@@ -1,0 +1,329 @@
+\documentclass[12pt]{exam}
+\usepackage{amsthm}
+\usepackage{libertine}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage{cleveref}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{siunitx}
+\usepackage{cancel}
+% \usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{tikz}
+% \usepackage[usenames,dvipsnames]{xcolor}
+
+
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+% \tikzexternalize
+
+\newcommand{\class}{Number Theory} % This is the name of the course 
+\newcommand{\examnum}{Homework 7.3} % This is the name of the assignment
+\newcommand{\examdate}{24 Feb. 2023} % This is the due date
+\newcommand{\timelimit}{}
+
+\makeatother
+\usepackage{thmtools}
+\usepackage[framemethod=tikz]{mdframed}
+\definecolor{NavyBlue}{RGB}{0, 0, 128}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{NavyBlue!70!black}, bodyfont=\normalfont,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=NavyBlue, backgroundcolor=NavyBlue!5,
+    }
+]{thmbluebox}
+\declaretheorem[style=thmbluebox, numbered=no, name=Answer]{answer}
+
+
+\begin{document}
+\pagestyle{plain}
+\thispagestyle{empty}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+      \textbf{\class} & \textbf{Name:} & \textit{Pohan Lin}\\ %Your name here instead, obviously 
+      \textbf{\examnum} &&\\
+      \textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+% ---
+7.3: 1, 2, 5, 7, 9, 10, 12, 13
+
+\begin{enumerate}
+      \item Use Euler's theorem to establish the following:
+            \begin{enumerate}
+                  \item For any integer $a$, $a^{37}  = a \pmod {1729}$.\newline
+                        [Hint: $1729 = 7 \cdot 13 \cdot 19$.]
+
+                        \begin{answer}
+                              By Euler's theorem:
+                              \[
+                                    \begin{aligned}
+                                          a^6    & \equiv 1 \pmod{7}  \Rightarrow a^{6\cdot6+1} = a^{37} \equiv a \pmod{7}    \\
+                                          a^{12} & \equiv 1 \pmod{13} \Rightarrow a^{3\cdot12+1} = a^{37}  \equiv a \pmod{13} \\
+                                          a^{18} & \equiv 1 \pmod{19} \Rightarrow a^{2\cdot18+1} = a^{37}  \equiv a \pmod{19} \\
+                                    \end{aligned}
+                              \]
+                              Then by the Chinese remainder theorem:
+                              \[
+                                    a^{37} \equiv a \pmod{7 \cdot 13 \cdot 19}
+                              \]
+                        \end{answer}
+
+                  \item For any integer $a$, $a^{13}  =a \pmod {2730}$.\newline
+                        [Hint: $2730 = 2 \cdot 3 \cdot 5 \cdot 7 \cdot 13$.]
+
+                        \begin{answer}
+                              By Euler's theorem:
+                              \[
+                                    \begin{aligned}
+                                          a^1    & \equiv 1 \pmod{2}  \Rightarrow a^{12\cdot1+1} = a^{13} \equiv a \pmod{2}   \\
+                                          a^{2}  & \equiv 1 \pmod{3} \Rightarrow a^{6\cdot2+1} = a^{13}  \equiv a \pmod{3}    \\
+                                          a^{4}  & \equiv 1 \pmod{5} \Rightarrow a^{3\cdot4+1} = a^{13}  \equiv a \pmod{5}    \\
+                                          a^{6}  & \equiv 1 \pmod{7} \Rightarrow a^{2\cdot6+1} = a^{13}  \equiv a \pmod{7}    \\
+                                          a^{12} & \equiv 1 \pmod{13} \Rightarrow a^{1\cdot12+1} = a^{13}  \equiv a \pmod{13} \\
+                                    \end{aligned}
+                              \]
+                              Then by the Chinese remainder theorem:
+                              \[
+                                    a^{13} \equiv a \pmod{2 \cdot 3 \cdot 5 \cdot 7 \cdot 13}
+                              \]
+                        \end{answer}
+
+                  \item For any odd integer $a$, $a^{33}  =a \pmod {4080}$.\newline
+                        [Hint: $4080 = 15 \cdot 16 \cdot 17$.]
+                        \newpage
+                        \begin{answer}
+                              Let $n = 3 \cdot 5 \cdot 16 \cdot 17$.
+                              Then by Euler's theorem:
+                              \[
+                                    \begin{aligned}
+                                          a^2    & \equiv 1 \pmod{3}  \Rightarrow a^{16\cdot2+1} = a^{33}  \equiv a \pmod{3}  \\
+                                          a^{4}  & \equiv 1 \pmod{5}  \Rightarrow a^{8\cdot4+1}  = a^{33}  \equiv a \pmod{5}  \\
+                                          a^{8}  & \equiv 1 \pmod{16} \Rightarrow a^{4\cdot8+1}  = a^{33}  \equiv a \pmod{16} \\
+                                          a^{16} & \equiv 1 \pmod{17} \Rightarrow a^{2\cdot16+1} = a^{33}  \equiv a \pmod{17} \\
+                                    \end{aligned}
+                              \]
+                              Then by the Chinese remainder theorem:
+                              \[
+                                    a^{33} \equiv a \pmod{3 \cdot 5 \cdot 16 \cdot 17}
+                              \]
+                        \end{answer}
+
+            \end{enumerate}
+      \item Use Euler's theorem to confirm that, for any integer $n \geq 0$,
+            \[
+                  51 \;|\; 10^{32n+9} - 7
+            \]
+
+            \begin{answer}
+                  \[
+                        51 \;|\; 10^{32n+9} - 7 \iff 10^{32n+9} \equiv 7 \pmod{51}
+                  \]
+                  Note that $\phi(51) = \phi(3)\phi(17) = 32$ and that $51$ and $10$ are relatively prime.
+                  By Euler's theorem:
+                  \[
+                        \begin{aligned}
+                              10^{32n+9} & \equiv 10^9 \pmod{51}                                           \\
+                                         & \equiv 2^8 \cdot 5^8 \cdot 10 \pmod{51}                         \\
+                                         & \equiv {({(2^2)}^2)}^2 \cdot {({(5^2)}^2)}^2 \cdot 10 \pmod{51} \\
+                                         & \equiv {(4^2)}^2 \cdot {(25^2)}^2 \cdot 10 \pmod{51}            \\
+                                         & \equiv {16}^2 \cdot {13}^2 \cdot 10 \pmod{51}                   \\
+                                         & \equiv 1 \cdot 16 \cdot 10 \pmod{51}                            \\
+                                         & \equiv 7 \pmod{51}                                              \\
+                        \end{aligned}
+                  \]
+            \end{answer}
+
+            \setcounter{enumi}{4}
+      \item If $m$ and $n$ are relatively prime positive integers, prove that
+            \[
+                  m^{\phi(n)} + n^{\phi(m)} \equiv 1 \pmod{mn}
+            \]
+
+            \begin{answer}
+                  Since $m$ and $n$ are relatively prime integers, then by Euler's theorem:
+                  \[
+                        \begin{aligned}
+                              m^{\phi(n)} & \equiv 1 \pmod n \\
+                              n^{\phi(m)} & \equiv 1 \pmod m
+                        \end{aligned}
+                  \]
+                  holds true.
+
+                  Then:
+                  \[
+                        \begin{aligned}
+                              m^{\phi(n)} + n^{\phi(m)} & \equiv 1 \pmod n \\
+                              n^{\phi(m)} + m^{\phi(n)} & \equiv 1 \pmod m
+                        \end{aligned}
+                  \]
+                  also holds true.
+
+                  By the Chinese remainder theorem
+                  \[
+                        m^{\phi(n)} + n^{\phi(m)} \equiv 1 \pmod {mn}
+                  \]
+            \end{answer}
+
+            \setcounter{enumi}{6}
+      \item Find the units digit of $3^{100}$ by means of Euler's theorem.
+
+            \begin{answer}
+                  Since $3$ and $100$ are relatively prime and $\phi(10) = 4$, by Euler's theorem
+                  \[
+                        3^4 \equiv 1 \pmod{10}
+                  \]
+                  Then
+                  \[
+                        3^{100} = 3^{25 \cdot 4} \equiv 1 \pmod{10}
+                  \]
+                  Thus the unit digit of $3^{100}$ is $1$.
+            \end{answer}
+
+            \setcounter{enumi}{8}
+      \item Use Euler's theorem to evaluate $2^{100000} \pmod{77}$.
+
+            \begin{answer}
+                  Since $2$ and $77$ are relatively prime and $\phi(77) = 60$, by Euler's theorem
+                  \[
+                        2^{60} \equiv 1 \pmod{77}
+                  \]
+                  \[
+                        \begin{aligned}
+                              2^{100000} = 2^{1666\cdot60}\cdot2^{40} & \equiv 2^{40} \pmod{77}       \\
+                                                                      & \equiv {(2^{10})}^4 \pmod{77} \\
+                                                                      & \equiv 23^4 \pmod{77}         \\
+                                                                      & \equiv {(23^2)}^2 \pmod{77}   \\
+                                                                      & \equiv 67^2 \pmod{77}         \\
+                                                                      & \equiv 23 \pmod{77}           \\
+                        \end{aligned}
+                  \]
+            \end{answer}
+
+      \item For any integer $a$, show that $a$ and $a^{4n+1}$ have the same last digit.
+
+            \begin{answer}
+                  \[
+                        a \text{ and } a^{4n+1} \text{ have the same last digit } \Leftrightarrow a^{4n+1} \equiv a \pmod{10}
+                  \]
+                  Since $\phi(10) = 4$
+                  \[
+                        a^{4n+1} = a^{4n} \cdot a \equiv a \pmod{10}
+                  \]
+                  when $\gcd(a, 10) = 1$.
+
+                  Now let's consider when $a$ and $10$ are not relatively prime.
+                  \begin{itemize}
+                        \item when $a \equiv 0 \pmod{10}$
+
+                              Since $0^m = 0 \; \forall m \in \mathbb{Z}$, this can be solved trivially
+
+                        \item when $a \equiv 2 \pmod{10}$
+                              \[
+                                    \begin{aligned}
+                                          a^{4n+1} & \equiv 2^{4n+1} \pmod{10}     \\
+                                                   & \equiv 16^n \cdot 2 \pmod{10} \\
+                                                   & \equiv 6^n \cdot 2 \pmod{10}  \\
+                                    \end{aligned}
+                              \]
+                              Since any power of $6$ will always end in a $6$, thus
+                              \[
+                                    2^{4n+1} \equiv 6 \cdot 2 \equiv 2 \pmod{10}
+                              \]
+
+                        \item when $a \equiv 4, 6, 8 \pmod{10}$
+                        
+                        These can also be expressed as
+                        \[
+                              a \equiv 14, 6, 18 \pmod{10}
+                              \]
+                              Since $14, 6, 18$ can all be expressed as $2 \cdot m$ where $m$ is relatively prime to $10$.
+                              Then 
+                              \[
+                                    \begin{aligned}
+                                          a^{4n+1} & \equiv {(2m)}^{4n+1} \pmod{10} \\
+                                          & \equiv 2m \pmod{10} \\
+                                          & \equiv a \pmod{10} \\
+                                    \end{aligned}
+                                    \]
+                                    
+                        \item when $a \equiv 5 \pmod{10}$
+                        
+                        Since any power of $5^m \equiv 5 \pmod{10} \; \forall m \in \mathbb{Z}$, this can be solved trivially.
+                  \end{itemize}
+
+                  Now we've checked all possible cases we can conclude that the statement holds true.
+            \end{answer}
+
+            \setcounter{enumi}{11}
+      \item Given $n \geq 1$, a set of $\phi(n)$ integers that are relatively prime to $n$
+            and that are incongruent modulo $n$ is called a reduced set of residues modulo $n$
+            (that is, a reduced set of residues are those members of a complete set of residues
+            modulo $n$ that are relatively prime to $n$). Verify the following:
+            \begin{enumerate}
+                  \item The integers $-31, -16, -8, 13, 25, 80$ form a reduced set of residues modulo $9$.
+
+                        \begin{answer}
+                              \[
+                                    \{-31, -16, -8, 13, 25, 80\} \equiv \{5, 2, 1, 4, 7, 8\} \pmod{9}
+                              \]
+                              We can see that there are $\phi(9) = 6$ relatively prime residues modulo $9$. 
+                              Thus this is a reduced set of residues modulo $9$.
+                        \end{answer}
+
+                  \item The integers $3, 3^2, 3^3, 3^4, 3^5, 3^6$ form a reduced set of residues modulo $14$.
+
+                        \begin{answer}
+                              \[
+                                    \{3, 3^2, 3^3, 3^4, 3^5, 3^6\} \equiv \{3, 9, 13, 11, 5, 1\} \pmod{14}
+                              \]
+                              We can see that there are $\phi(14) = 6$ relatively prime residues modulo $14$. 
+                              Thus this is a reduced set of residues modulo $14$.
+                        \end{answer}
+
+                  \item The integers $2, 2^2, 2^3, \dots, 2^{18}$ form a reduced set of residues modulo $27$.
+
+                        \begin{answer}
+                              \[
+                                    \begin{aligned}
+                                          &\{2, 2^2, 2^3, \dots, 2^{18}\} \\
+                                          &\equiv \{2, 4, 8, 16, 5, 10, 20, 13, 26, 25, 23, 19, 11, 22, 17, 7, 14, 1\} \pmod{27}
+                                    \end{aligned}
+                              \]
+                              We can see that there are $\phi(27) = 18$ relatively prime residues modulo $27$. 
+                              Thus this is a reduced set of residues modulo $27$.
+                        \end{answer}
+
+            \end{enumerate}
+      \item If $p$ is an odd prime, show that the integers
+            \[
+                  -\frac{p-1}{2}, \dots, -2, -1, 1, 2, \dots, \frac{p-1}{2}
+            \]
+            form a reduced set of residues modulo $p$.
+
+            \begin{answer}
+                  \[
+                        \begin{aligned}
+                              &\{-\frac{p-1}{2}, \dots, -2, -1, 1, 2, \dots, \frac{p-1}{2}\} \\
+                              &\equiv \{-\frac{p-1}{2}, \dots, -2, -1\} \cup \{1, 2, \dots, \frac{p-1}{2}\} \pmod{p} \\
+                              &\equiv \{-\frac{p-1}{2} + p, \dots, -2 + p, -1 + p\} \cup \{1, 2, \dots, \frac{p-1}{2}\} \pmod{p} \\ 
+                              &\equiv \{\frac{p+1}{2}, \dots, p - 2, p - 1\} \cup \{1, 2, \dots, \frac{p-1}{2}\} \pmod{p} \\
+                              &\equiv \{1, 2, \dots, \frac{p-1}{2}, \frac{p+1}{2}, \dots, p - 2, p - 1\} \pmod{p} \\
+                        \end{aligned}
+                  \]
+                  There are total of $p - 1 = \phi(p)$ distinct integers.
+            \end{answer}
+
+\end{enumerate}
+
+\end{document}
