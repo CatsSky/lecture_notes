@@ -264,3 +264,180 @@
         \phi(n) = n \sum_{d|n}{\frac{\mu(d)}{d}}, \forall n \in \N
     \]
 \end{theorem}
+
+\begin{eg}
+    Let $n = 10$, Then $\phi(n) = 4$
+
+    On the other hand,
+    \[
+        \begin{aligned}
+            n \sum_{d|n}^{}{\frac{\mu(d)}{d}} &= 10 \sum_{d|10}^{}{\frac{\mu(d)}{d}} \\
+            &= 10 [\frac{\mu(1)}{1} + \frac{\mu(2)}{2} + \frac{\mu(5)}{5} + \frac{\mu(10)}{10}] \\
+            &= 10 [\frac{1}{1} + \frac{-1}{2} + \frac{-1}{5} + \frac{{(-1)}^2}{10}] \\
+            &= 10 \cdot \frac{2}{5} = 4
+        \end{aligned}
+    \]
+
+    Recall that if $n = \prod_{j=1}^{r}{p^{k_j}_{j}}$ is the prime factorization of $n$,
+    then 
+    \[
+        \tag{*}
+        \phi(n) = \prod_{j=1}^{r}{p^{k_j}_{j} - p^{k_j-1}_{j}} = n\prod_{j=1}^{r}{(1-\frac{1}{p_j})}
+        \label{eqn:7.4.1}
+    \]
+    We want to prove~\eqref{eqn:7.4.1} by using Theorem 7.8.
+    Since $\phi$ is a multiplicative function, it suffices to show 
+    \[
+        \tag{**}
+        \phi(p^k) = p^k - p^{k-1}
+        \label{eqn:7.4.2}
+    \]
+    where $p$ is a prime and $k \in \N$.
+
+    To prove~\eqref{eqn:7.4.2}, we apply theorem 7.8.
+    \[
+        \begin{aligned}
+            \phi(p^k) &= p^k \sum_{d|p^k}{\frac{\mu(d)}{d}} \\
+            &= p^k (\frac{\mu(1)}{1} + \frac{\mu(p)}{p} + \frac{\mu(p^2)}{p^2} + \cdots + \frac{\mu(p^k)}{p^k}) \\
+            &= p^k (1 - \frac{1}{p}) \\
+            &= p^k - p^{k-1}
+        \end{aligned}
+    \]
+\end{eg}
+
+
+\chapter{PRIMITIVE ROOTS AND INDICES}
+
+\section{The Order of an Integer Modulo $n$}
+
+\setcounter{definition}{0}
+\setcounter{theorem}{0}
+
+\begin{definition}
+    Let $n, a$ be integers with $n>1$ and $\gcd(a, n) = 1$.
+    The order of $a$ modulo $n$ is the \textbf{smallest} $k \in \N$ s.t. $a^k \equiv 1 \pmod n$.
+    We sometimes denote $k$ by $\text{ord}_n(a)$
+\end{definition}
+\begin{eg}
+    Let $n = 7$ and $a = 2$, We compute $\text{ord}_7(2)$:
+    \[
+        \begin{aligned}
+            2^1 \equiv 2 \pmod 7 \\
+            2^2 \equiv 4 \pmod 7 \\
+            2^3 \equiv 1 \pmod 7 \\
+            \Rightarrow \text{ord}_7(2) = 3
+        \end{aligned}
+    \]
+
+    Note that by Fermat's little theorem: $2^{7-1} \equiv 1 \pmod 7$.
+
+    In general, $2^{3m} \equiv 1 \pmod 7 \; \forall m \in \N$
+\end{eg}
+\begin{remark}
+    .
+    \begin{enumerate}
+        \item Note that if $a \equiv b \pmod n$, then $\text{ord}_n(a) = \text{ord}_n(b)$\newline
+        \emph{Since $a \equiv b \pmod n \Rightarrow a^m \equiv b^m \pmod n , \forall m \in \N$}
+
+        \item If $\gcd(a, n) > 1$, then $a^m \not\equiv 1 \pmod n, \forall m \in \N$\newline
+        \emph{If $\gcd(a, n) > 1$ but $a^m \equiv 1 \pmod n$ for some $m \in \N$, then
+        the linear conguence $ax \equiv 1 \pmod n$ has a solution $x = a^{m-1}$. This is a countradiction
+        since $\gcd(a, b) \not | 1$}
+    \end{enumerate}
+\end{remark}
+
+\begin{theorem}
+    Let $a$ be an integer with order $k$ modulo $n$. Then $a^k \equiv 1 \pmod n$ 
+    iff $k | h$. In particular, we have $k | \phi(n)$\newline
+    \emph{By Euler's Theorem, $a^{\phi(n)} \equiv 1 \pmod n \Rightarrow k | \phi(n)$}
+
+\end{theorem}
+\begin{proof}
+    $(\Leftarrow)$ Suppose $k|h$. Then $h = km$ for some $m \in \N$.
+    Since $k$ is the order of $a$ modulo $n$, $a^k \equiv 1 \pmod n$.
+    Hence $a^h = a^{km} = {(a^k)}^m \equiv 1^m = 1 \pmod n$
+
+    $(\Rightarrow)$ Suppose $a^k \equiv 1 \pmod n$. By division algorithm,
+    \[
+        h = kq+r
+    \]
+    for some integer $q, r$ with $0 \leq r < k$. Since $a^k \equiv 1 \pmod n$, 
+    we get $1 \equiv a^h = a^{kq+r} = a^r \cdot {(a^k)}^q \equiv a^r \cdot 1^q = a^r \pmod n$.
+    Since $r < k$ and $k$ is the order of $a \Rightarrow r = 0 \Rightarrow k | h$
+\end{proof}
+
+\begin{remark}
+    \begin{enumerate}
+        \item Theorem 8.1 implies that in order to find the order of $a$ modulo $n$, it suffices to consider the positive divisors $\phi(n)$
+        for example, since $\phi(13) = 12$, Theorem 8.1 implies $\text{ord}_{13}(2 = 1, 2, 3, 4, 6, 12)$. Since
+        \[
+            \begin{aligned}
+                2^1 \equiv 2 \pmod 13 \\
+                2^2 \equiv 4 \pmod 13 \\
+                2^3 \equiv 8 \pmod 13 \\
+                2^4 \equiv 3 \pmod 13 \\
+                2^6 \equiv 12 \pmod 13 \\
+                2^{12} \equiv 1 \pmod 13 \\
+            \end{aligned}
+        \] 
+        we find $\text{ord}_{13}(2) = 12$
+
+        \item Conversely, for an arbitrary selected divisor $d$ of $\phi(n)$, it's not always true
+        that there exists an integer having order $d$ modulo $n$. For example, take $n = 12$.
+        Then $\phi(12) = 4$, yet there is no integer that is of order $4$ modulo $12$.
+        \[
+            \begin{aligned}
+                &1 \equiv 5^2 \equiv 7^2 \equiv 11^2 \pmod{12} \\
+                &\Rightarrow \text{ord}_{12}(1) = 1, \text{ord}_{12}(5) = \text{ord}_{12}(7) = \text{ord}_{12}(11) = 2
+            \end{aligned}
+        \]
+    \end{enumerate}
+\end{remark}
+
+\begin{theorem}
+    If $\text{ord}_{n}(a) = k$, then $a^i \equiv a^j \pmod n$ iff $k | i - j$, i.e. $i \equiv j \pmod k$.
+\end{theorem}
+\begin{proof}
+    $(\Rightarrow)$ Suppose $a^i \equiv a^j \pmod n$ and $i \geq j$.
+    Then $n | a^j - a^i = a^j(a^{i-j} - 1)$.
+    Since $\gcd(a, n) = 1$, we find that $n | a^{i-j} - 1$, i.e.
+    \[
+        a^{i-j} \equiv 1 \pmod n
+    \]
+    Now theorem 8.1 implies, $k | i-j$, i.e. $i \equiv j \pmod k$
+
+    $(\Leftarrow)$ Suppose $i \equiv j \pmod n$ and $i \geq j$ and 
+    Theorem 8.1 says $a^{i-j} \equiv 1 \pmod n \Rightarrow a^{(i-j)} a^j \equiv a^j \pmod n$
+\end{proof}
+\begin{corollary}
+    If $a$ has order $k$ modulo $n$, then the integers $a, a^2, \dots, a^k$ are conguent modulo $n$.
+\end{corollary}
+\begin{proof}
+    If $a^i \equiv a^j \pmod n$ for some $1 \leq i, j \leq k$, then theorem 8.2 implies $i \equiv j \pmod k$.
+    Since $1 \leq i, j \leq k$, the condition $i \equiv j \pmod k$ gives $i = j$
+\end{proof}
+
+\begin{theorem}
+    If an integer $a$ has the order $k$ modulo $n$ and $h > 0$. 
+    Then $a^h$ has an order $\frac{k}{\gcd(k, h)}$ modulo $n$
+\end{theorem}
+\begin{proof}
+    Let $d = \gcd(k, h)$ and $k = dk\prime$, $h = dh\prime$, 
+    for some $k\prime, h\prime \in \N$ with $\gcd(k\prime, h\prime) = 1$.
+    Then we have $\frac{k}{\gcd(k, h)} = \frac{k}{d} = k\prime$ and
+    \[
+        \begin{aligned}
+            {(a^h)}^{\frac{k}{\gcd(k, h)}} &= {(adh\prime)}^{k\prime} \\
+            &= a^{dh\prime k\prime} \\
+            &= a^{kh\prime} \\
+            &= {(a^k)}^{h\prime} \equiv 1 \pmod n
+        \end{aligned}
+    \]
+
+    By theorem 8.1, we have $r | k\prime$ where $r = \text{ord}_N(a^h)$.
+    On the other hand, since $a$ has order $k$ modulo $n$ and $1 \equiv {(a^h)}^r = a^{hr} \pmod n$,
+    we get $k | hr$ by theorem 8.1 again. This implies $k\prime | h\prime r$. Since
+    $\gcd(k\prime, h\prime) = 1$, we find that $k\prime | r$. Thus $r = k\prime = \frac{k}{\gcd(k, h)}$.
+\end{proof}
+
+
