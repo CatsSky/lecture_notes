@@ -440,4 +440,76 @@
     $\gcd(k\prime, h\prime) = 1$, we find that $k\prime | r$. Thus $r = k\prime = \frac{k}{\gcd(k, h)}$.
 \end{proof}
 
+% skipped some 
 
+\begin{theorem}
+    $\text{ord}_{n}(a) | \phi(n) \Rightarrow \text{ord}_{n}(a) \leq \phi(n)$ 
+\end{theorem}
+\begin{proof}
+    Let $a, n \in \Z$ with $n > 1$ and $\gcd(a, n) = 1$. If the order of $a$ mudulo $n$ is $\phi(n)$, i.e.
+    $\text{ord}_{n}(a) = \phi(n)$.
+    % not finished
+\end{proof}
+
+
+\begin{remark}
+    \textbf{NOT} every $n$ has a primitive root!
+\end{remark}
+\begin{eg}
+    \[
+        \begin{aligned}        
+            & n=12, a=1, 5, 7, 11 \\
+            & \phi(12) = 4 \\
+            & 1 = 1 \pmod {12} \Rightarrow \text{ord}_{12}(1) = 1 \\
+            & 5^2 \equiv 7^2 \equiv 11^2 \equiv 1 \pmod {12} \\
+            & \Rightarrow \text{ord}_{12}(5) = \text{ord}_{12}(7) = \text{ord}_{12}(11) = 2 \neq 4
+        \end{aligned}
+    \]
+\end{eg}
+\begin{remark}
+    Primitive root may not be unique.
+\end{remark}
+
+
+\begin{theorem}
+    Let $\gcd(a, n) = 1$ and $a_1, \dots, 1_{\phi(n)}$ be the positive
+    integers less than and relatively prime to $n$.
+
+    If $a$ is a primitive root of $n$, then $a, a^2, \dots, a^{\phi(n)}$
+    are conguent mudulo $n$ to $a_1, \dots, 1_{\phi(n)}$ is same order.
+\end{theorem}
+\begin{proof}
+    Since $\gcd(a, n) = 1$, we have $\gcd(a^i, n) = 1$ for all $i \in \N$.
+    It follows that $a^i \equiv a_{k_i} \pmod n$ for some $1 \leq k_i \leq \phi(n)$.
+
+    By Cor.\ to Theorem 8.2, the $\phi(n)$ integers in $\{a, a^2, \dots, a^{\phi(n)}\}$
+    are conguent modulo n, i.e. $a^i \equiv a^j \pmod n, \; \forall 1 \leq i \neq j \leq \phi(n)$.
+    $\Rightarrow a_{k_i} \not \equiv a_{k_j} \pmod n,\; \forall 1 \leq i \neq j \leq \phi(n)$.
+
+    Therefore, we get $\{a, a^2, \dots, a^{\phi()}\} \pmod n = \{a_1, \dots, a_{\phi(n)}\}$.
+\end{proof}
+
+\begin{corollary}
+    If $n$ has a primitive root, then there are exact $\phi(\phi(n))$ of them.
+\end{corollary}
+\begin{proof}
+    Suppose that $a$ is a primitive root of $n$.
+
+    By Theorem 8.4, any other primitive root mudulo $n$ is found in the members of the set 
+    $\{a, a^2, \dots, a^{\phi(n)}\}$.
+
+     We know that $\text{ord}_n(a^h) = \frac{\phi(n)}{\gcd(h, \phi(n))}$ for $1 \leq h \leq \phi(n)$
+     $\Rightarrow \text{ord}_n(a^h) = \phi(n) \iff \gcd(h, \phi(n)) = 1$
+    there are $\phi(\phi(n))$ such $h$.
+\end{proof}
+\begin{eg}
+    \[
+        n=13, a=2, \phi(n) = 12
+    \]
+    \[
+        \{2^1, 2^2, \dots, 2^{12}\}
+    \]
+    \[
+        1 \leq k \leq 12, \gcd(12, k) = 1 \Rightarrow 1, 55, 7, 11 \Rightarrow 2^1, 2^5, 2^7, 2^{11} \pmod {13}
+    \]
+\end{eg}
