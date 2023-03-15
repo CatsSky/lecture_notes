@@ -372,12 +372,12 @@
         for example, since $\phi(13) = 12$, Theorem 8.1 implies $\text{ord}_{13}(2 = 1, 2, 3, 4, 6, 12)$. Since
         \[
             \begin{aligned}
-                2^1 \equiv 2 \pmod 13 \\
-                2^2 \equiv 4 \pmod 13 \\
-                2^3 \equiv 8 \pmod 13 \\
-                2^4 \equiv 3 \pmod 13 \\
-                2^6 \equiv 12 \pmod 13 \\
-                2^{12} \equiv 1 \pmod 13 \\
+                2^1 \equiv 2 \pmod {13} \\
+                2^2 \equiv 4 \pmod {13} \\
+                2^3 \equiv 8 \pmod {13} \\
+                2^4 \equiv 3 \pmod {13} \\
+                2^6 \equiv 12 \pmod {13} \\
+                2^{12} \equiv 1 \pmod {13} \\
             \end{aligned}
         \] 
         we find $\text{ord}_{13}(2) = 12$
@@ -513,3 +513,152 @@
         1 \leq k \leq 12, \gcd(12, k) = 1 \Rightarrow 1, 55, 7, 11 \Rightarrow 2^1, 2^5, 2^7, 2^{11} \pmod {13}
     \]
 \end{eg}
+
+% extra
+
+\subsection*{RSA Encryption}
+
+Let $p, q$ be distinct primes.
+Let $n = p \cdot q \Rightarrow \phi(n) = \phi(p - 1)\phi(q - 1) = (p - 1)(q - 1)$.\newline
+Pick $a, b \in \Z$ satisfy $a \cdot b \equiv 1 \pmod{\phi(n)}$.
+
+\begin{itemize}
+    \item Encryption\newline
+    $x \in \Z_n \Rightarrow e_b(x) = x^b \pmod n$
+    
+    \item Decryption\newline
+    $y \in \Z_n \Rightarrow d_a(y) = y^a \pmod n$
+
+    \item Check\newline
+    $d_a(e_b(x)) = x \Rightarrow x^{ab} \equiv x \pmod n, \;\forall x \in \Z_n$
+    
+\end{itemize}
+
+
+Public Key: $k = (b, n)$,
+Private Key: $k\prime = (a, n)$
+
+\begin{proof}
+    Assume $\gcd(x, n) = 1$, then
+    \[
+        x^{\phi(n)} \equiv 1 \pmod n
+    \]
+    by Euler's Theorem.
+    Since $ab \equiv 1 \pmod {\phi(n)}$,
+    \[
+        ab = \phi(n)m+1 \Rightarrow
+        \begin{aligned}
+            x^{ab} &= x^{\phi(n)m + 1}\\
+            &= x {[x^{\phi(n)}]}^m\\
+            &\equiv x \cdot 1^m \pmod n\\
+            &=x
+        \end{aligned}
+    \]
+
+    Suppose $\gcd(x, n) \neq 1$. Three cases
+    \begin{itemize}
+        \item $n\; |\; x \Rightarrow x^{ab} \equiv 0 \equiv x \pmod n$
+        \item $p\; |\; x \text{ but } q \neq x$
+        \[
+            x^{ab} \equiv x \equiv 0 \pmod p
+        \]
+        On the other hand, by Fermat's little theorem
+        \[
+            x^{q-1 \equiv 1 \pmod q}
+        \]
+        It follows that
+        \[
+            \begin{aligned}
+                x^{ab} &= x^{\phi(n)m+1}\\
+                &= x^{(p-1)(q-1)m+1}\\
+                &= x\cdot{[x^{q-1}]}^{(p-1)m}\\
+                &\equiv x\cdot 1^{(p-1)n}\\
+                &= x \pmod q
+            \end{aligned}
+        \]
+    \end{itemize}
+    
+\end{proof}
+
+\begin{proof}
+    Why $k \not\Rightarrow k\prime$?
+
+    If we know the prime factorization of 
+    \[  
+        n = pq
+    \]
+    then we can obtain $\phi(n) = (p-1)(q-1)$ easily.
+
+    If we know $\phi(n)$, then a is the unique solution to the linear conguence
+    \[
+        bx \equiv 1 \pmod{\phi(n)}
+    \]
+    So the security of the RSA cryptosystem depends on the prime factorization of 
+    $n = pq$
+\end{proof}
+
+\section{Primitive Roots \& Primes}
+
+GOAL:\@ Find $n$ s.t. $n$ has a primitive root.
+
+The aim of this section is to prove the existanceof primitive roots 
+when $n = p$ is a prime
+
+\setcounter{theorem}{0}
+\begin{theorem}
+    Lagrange
+
+    If $p$ is a prime and $f(x) = a_n x^n + \cdots + a_1x + a_0$
+    is a polynomial with $a_0, a_1, \dots, a_n \in \Z$ and $p\;|\;a_n$, 
+    then the conguence $f(x) \equiv 0 \pmod p$ has at most $n$ inconguent 
+    solutions modulo $p$.
+\end{theorem}
+\begin{proof}
+    The proof is by induction on $n$. If $n = 1$, then 
+    \[
+        f(x) = a_1 x + a_0
+    \]
+    and $f(x) \equiv 0 \pmod p \iff a_1 x \equiv -a_0 \pmod p$.
+    Since $\displaystyle p \not| a$, we have $\gcd(a_1, p) = 1$. Thus
+    Theorem 4.7 implies that the linear conguence $a_1 x\equiv -a_0 \pmod p$
+    has a unique solution modulo $p$.
+
+    Suppose inductively that it holds true for all such polynomial with degree $n = k-1$
+    and let $f(x) = a_n x^n + \cdots + a_1x + a_0$ with $a_0, a_1, \dots, a_n \in \Z$ and
+    $p \not| a_k$. We want to show $f(x) \equiv 0 \pmod p$ has at most $k$ conguent solutions
+    modulo $p$.
+    If $f(x) \equiv 0 \pmod p$ has no solution, then we are done.
+
+    Suppose $f(x) \equiv 0 \pmod p$ has a solution, say $a \in \Z$, i.e. $f(a) \equiv 0 \pmod p$.
+    Write
+    \[
+        f(x) = (x-a)q(x) + r
+    \]
+    for some $q(x) = b_{k-1} x^{k-1} + b_{k-2} x^{k-2} + \dots, b_1 x + b_0$
+    with $b_0, b_1, \dots, b_{k-1} \in \Z$ and $b_{k-1} = a_k$
+
+    Since $f(a) \equiv 0 \pmod p$, we find that 
+    \[  
+        r = f(a) \equiv 0 \pmod p
+    \]
+    Hence we have $f(x) \equiv (x-a)q(x) \pmod p$.
+
+    If $h(x) = \sum_{j=0}^{n}{c_j x^j}$ \& $k(x) = \sum_{j=0}^{n}{d_j x^j}$
+    are polynomials with integer coefficients, we write $h(x) \equiv k(x) \pmod p$
+    if $c_j \equiv d_j \pmod p$ for $0 \leq j \leq n$
+
+    Now let $b \in \Z$ be another solution of $f(x) \equiv 0 \pmod p$ with 
+    $b \not\equiv a \pmod p$. We show that $q(b) \equiv 0 \pmod p$.
+
+    Indeed, since $f(b) \equiv (b - a)q(b) \equiv 0 \pmod p, \Rightarrow p| (b-a)q(b)$.
+
+    Since $b \not\equiv a \pmod p$, $\Rightarrow p \not| (b-a) \Rightarrow p | q(b)$
+    i.e. $q(b) \equiv 0 \pmod p$, so $b$ is a solution of $q(x) \equiv 0 \pmod p$.
+
+    So we have shown that if $b \not\equiv a \pmod p$ is a solution of $f(x) \equiv 0 \pmod p$,
+    thn $b$ is a solution of $q(x) \equiv \pmod p$.
+
+    Since the degree of $q(x)$ is $k-1$ and its leading coefficient is not divisible by $p$, the induction hypothesis
+    implies that $q(x) \equiv 0 \pmod p$ has at most 
+    $k-1$ inconguent solutions modulo $p$ It follows that $f(x) \equiv 0 \pmod p$ has at most $k$ inconguent solutions modulo $p$
+\end{proof}
