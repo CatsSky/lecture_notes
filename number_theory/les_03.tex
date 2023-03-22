@@ -662,3 +662,34 @@ when $n = p$ is a prime
     implies that $q(x) \equiv 0 \pmod p$ has at most 
     $k-1$ inconguent solutions modulo $p$ It follows that $f(x) \equiv 0 \pmod p$ has at most $k$ inconguent solutions modulo $p$
 \end{proof}
+
+Primitive root:
+Let $a, n \in \Z$ with $n > 1$ and $\gcd(a, n) = 1$. The 
+$a$ is a primitive root for n if $\text{ord}_n(a) = \phi(n)$
+
+Goal of this section: 
+Prove that if $n = p$ is a prime, then primitive roots for $p$ exists.
+
+\begin{corollary}
+    If $p$ is a prime \& $D|p-1$, then the conguence $x^d - 1 \equiv 0 \pmod p$ has exactly $d$
+    inconguent solution modulo $p$.
+\end{corollary}
+\begin{proof}
+    Let $p - 1 = dk$ for some $k \in \N$.
+    Then
+    \[
+        x^{p-1}-1 = x^{dk}-1 = (x^d - 1)f(x)
+    \]
+    with $f(x) = x^{d(k-1)} + x^{d(k-2)} + \cdots + x^d + 1$.
+
+    Since $f(x)$ has integer coefficient \& $\deg f(x) = d(k-1) = dk-d = p-1-d$
+
+    Lagrange's Theorem implies that $f(x) \equiv 0 \pmod p$ has at most $p-1-d$ inconguent solution modulo $p$.
+    on the other hand, by Fermat's little theorem, $x^{p-1} \equiv 0 \pmod p$ has $p-1$ inconguent solution modulo $p$, namely, $1, 2, \dots, p-1$
+
+    Note that if $a$ is a solution of $x^{p-1}-1 \equiv 0 \pmod p$ but is \textbf{NOT} a solution of $f(x) \equiv 0 \pmod p$,
+    then $a$ is a solution of $x^d-1 \equiv 0 \pmod p$. 
+    Indeed, the assumption implies $0 \equiv a^{p-1} = (a^d - 1)f(a) \pmod p$
+
+    
+\end{proof}
