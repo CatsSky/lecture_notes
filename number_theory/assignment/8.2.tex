@@ -1,0 +1,201 @@
+\documentclass[12pt]{exam}
+\usepackage{amsthm}
+\usepackage{libertine}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage{cleveref}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{siunitx}
+\usepackage{cancel}
+% \usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{tikz}
+% \usepackage[usenames,dvipsnames]{xcolor}
+
+
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+% \tikzexternalize
+
+\newcommand{\class}{Number Theory} % This is the name of the course 
+\newcommand{\examnum}{Homework 8.2} % This is the name of the assignment
+\newcommand{\examdate}{26 Mar. 2023} % This is the due date
+\newcommand{\timelimit}{}
+
+\makeatother
+\usepackage{thmtools}
+\usepackage[framemethod=tikz]{mdframed}
+\definecolor{NavyBlue}{RGB}{0, 0, 128}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{NavyBlue!70!black}, bodyfont=\normalfont,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=NavyBlue, backgroundcolor=NavyBlue!5,
+    }
+]{thmbluebox}
+\declaretheorem[style=thmbluebox, numbered=no, name=Answer]{answer}
+
+\begin{document}
+\pagestyle{plain}
+\thispagestyle{empty}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+      \textbf{\class} & \textbf{Name:} & \textit{Pohan Lin}\\ %Your name here instead, obviously 
+      \textbf{\examnum} &&\\
+      \textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+% ---
+8.2: 1, 2, 4, 6, 10, 11
+
+\begin{enumerate}
+      \item If $p$ is an odd prime, prove the following:
+      \begin{enumerate}
+            \item The only inconguent solutions of $x^2 \equiv 1 \pmod p$ are $1$ and $p-1$.
+            \begin{answer}
+                  \[
+                        \begin{aligned}
+                              &x^2 - 1 \equiv 0 \pmod p \\
+                              &\Leftrightarrow (x-1)(x+1) \equiv 0 \pmod p\\
+                              &\Leftrightarrow p \; | \; (x-1)(x+1)\\
+                        \end{aligned}
+                  \]
+                  Since $p$ is prime, it must divides either $x-1$ or $x+1$, then we get
+                  \[
+                        \begin{aligned}
+                              x - 1 \equiv 0 \pmod p \; & \text{or} \; x + 1 \equiv 0 \pmod p \\
+                              x \equiv 1 \pmod p \; & \text{or} \; x \equiv p - 1 \pmod p \\
+                        \end{aligned}
+                  \]
+            \end{answer}
+            \item The congruence $x^{p-2} + \cdots + x^2 + x + 1 \equiv 0 \pmod p$ has exactly $p-2$ 
+            incongruent solutions, and they are the integers $2, 3, \dots, p-1$.
+            \begin{answer}
+                  Let $p$ be an odd prime. Fermat's little theorem says that $x^{p-1} \equiv 0 \pmod p$ is satisfied
+                  by $1,2,\dots,p-1$. By Lagrange's theorem, the congruence can have at most $p-1$ solutions. Thus 
+                  these are all of the solutions.
+                  \[
+                        x^{p-1} - 1 \equiv (x-1)(x^{p-2} + \cdots + x^2 + x + 1) \equiv 0 \pmod p
+                  \]
+                  Let $a \not\equiv 1 \pmod p$ and denotes $f(x) = x^{p-2} + \cdots + x^2 + x + 1$.
+                  \[
+                        a^{p-1} - 1 \equiv f(a)(a - 1) \equiv 0 \pmod p
+                  \]
+                  Since $\gcd(a - 1, p) = 1$, we can then divides both side by $a-1$.
+                  \[
+                        f(a) \equiv 0 \pmod p
+                  \]
+            \end{answer}
+      \end{enumerate}
+      \item Verify that each of the congruences $x^2 \equiv 1 \pmod {15}$, $x^2 \equiv -1 \pmod {65}$, 
+      and $x^2 \equiv -2 \pmod {33}$ has four incongruent solutions; hence, Lagrange's theorem need 
+      not hold if the modulus is a composite number.
+
+      \begin{answer}
+            
+      \end{answer}
+
+
+      \setcounter{enumi}{3}
+      \item Given that 3 is a primitive root of 43, find the following:
+      \begin{enumerate}
+            \item All positive integers less than 43 having order 6 modulo 43.
+            \begin{answer}
+                  Given that 3 is a primitive root of 43. Thus 3 has order $\phi(43) = 42$.
+
+                  $3^k$ will have order $\frac{42}{\gcd(42, k)}$.
+
+                  In order for this to be 6, $\gcd(42, k) = 7$.
+                  Also, we only need to consider $1 \leq k \leq 42$.
+
+                  $\Rightarrow k = 7, 35$
+            \end{answer}
+            \item All positive integers less than 43 having order 21 modulo 43.
+            \begin{answer}
+                  Given that 3 is a primitive root of 43. Thus 3 has order $\phi(43) = 42$.
+                  
+                  $3^k$ will have order $\frac{42}{\gcd(42, k)}$.
+
+                  In order for this to be 21, $\gcd(42, k) = 2$.
+
+                  $\Rightarrow k = 2, 4, 8, 10, 16, 20, 22, 26, 32, 34, 38, 40$
+            \end{answer}
+      \end{enumerate}
+
+      \setcounter{enumi}{5}
+      \item Assuming that $r$ is a primitive root of the odd prime $p$, establish the following facts:
+
+      \begin{enumerate}
+            \item The congruence $r^{(p-1)/2} \equiv -1 \pmod p$ holds.
+            \begin{answer}
+                  By Fermat's little theorem 
+                  \[
+                        r^{p-1} = {(r^{\frac{p-1}{2}})}^2 \equiv 1 \pmod p
+                  \]
+                  The congruence $x^2 \equiv 1 \pmod p$ has only two solutions $x = 1$ and $x = -1$. This shows that
+                  $r^{(p-1)/2}$ is either $1$ or $-1$. But the primitive root of $p$ is $r$, thus $r^{(p-1)/2} \equiv -1 \pmod p$
+            \end{answer}
+            \item If $r\prime$ is any other primitive root of $p$, then $rr\prime$ is not a primitive root of $p$.\newline
+            [Hint: By part (a), ${(rr\prime)}^{(p-1)/2} \equiv 1 \pmod p$.]
+            \begin{answer}
+                  Assume that $r'$ is any other primitive root of $p$. By (a), the product of $r$ and $r'$ satisfies
+                  \[
+                        {(rr')}^{\frac{p-1}{2}} \equiv r^{\frac{p-1}{2}} {r'}^{\frac{p-1}{2}} \equiv (-1)(-1) \equiv 1 \pmod p
+                  \]
+                  thus $rr'$ is of order ${\frac{p-1}{2}}$ and therefore not a primitive root of $p$
+            \end{answer}
+            \item If the integer $r\prime$ is such that $rr\prime \equiv 1 \pmod p$, then $r\prime$ is a primitive root of $p$.
+            \begin{answer}
+                  Suppose that $rr' \equiv 1 \pmod p$, that is, $r'$ is the multiplicative inverse of $r$,
+                  $r'$ is unique and can be given by $r' = r^{p-2}$
+
+                  Since $\gcd(p-1, p-2) = 1$, the order of $r'$ is $\frac{p-1}{\gcd(p-1, p-2)} = p-1$, thus $r'$ is a primitive root of $p$.
+            \end{answer}
+      \end{enumerate}
+
+      \setcounter{enumi}{9}
+      \item Use the fact that each prime $p$ has a primitive root to give a different proof of Wilson's
+      theorem.\newline
+      [Hint: If $p$ has a primitive root $r$, then Theorem 8.4 implies that $(p - 1)! = r^{1+2+\cdots+(p-1)} \pmod p$.]
+      \begin{answer}
+            Every prime has a primitive root, let the primitive root of $p$ be $r$, and
+            \[
+                  \begin{aligned}
+                        (p - 1)! &\equiv r^{1+2+\cdots+(p-1)} \pmod p \\
+                        &\equiv r^{\frac{p(p-1)}{2}} \pmod p \\
+                        &\equiv {(r^{\frac{p-1}{2}})}^p \pmod p \\
+                        &\equiv {(-1)}^p \pmod p \\
+                        &\equiv -1 \pmod p
+                  \end{aligned}
+            \]
+
+      \end{answer}
+      \item If $p$ is a prime, show that the product of the $\phi(p - 1)$ primitive roots of $p$ is congruent
+      modulo $p$ to ${(-1)}^{\phi(p-1)}$.\newline
+      [Hint: If $r$ is a primitive root of $p$, then the integer $r^k$ is a primitive root of $p$ provided
+      that $\gcd(k, p - 1) = 1$; now use Theorem7.7.]
+
+      \begin{answer}
+            Consider the $\phi(p-1) = \phi(\phi(p))$ primitive roots of $p$ and let $r$ be one of them.
+            Every other primitive roots can be expressed as power of $r$.
+            \[
+                  r, r^{a_2}, \dots, r^{a_{\phi(p-1)}}
+            \]
+            Then the product of all primitive roots is
+            \[
+                  r^{1+a_2+\cdots+a_{\phi(p-1)}} \equiv r^{\frac{\phi(p-1)(p-1)}{2}} \equiv {(-1)}^{\phi(p-1)} \pmod p
+            \]
+      \end{answer}
+
+\end{enumerate}
+
+\end{document}
