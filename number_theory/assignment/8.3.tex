@@ -1,0 +1,215 @@
+\documentclass[12pt]{exam}
+\usepackage{amsthm}
+\usepackage{libertine}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage{cleveref}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{siunitx}
+\usepackage{cancel}
+% \usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{tikz}
+% \usepackage[usenames,dvipsnames]{xcolor}
+
+
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+% \tikzexternalize
+
+\newcommand{\class}{Number Theory} % This is the name of the course 
+\newcommand{\examnum}{Homework 8.3} % This is the name of the assignment
+\newcommand{\examdate}{3 Apr. 2023} % This is the due date
+\newcommand{\timelimit}{}
+
+\makeatother
+\usepackage{thmtools}
+\usepackage[framemethod=tikz]{mdframed}
+\definecolor{NavyBlue}{RGB}{0, 0, 128}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{NavyBlue!70!black}, bodyfont=\normalfont,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=NavyBlue, backgroundcolor=NavyBlue!5,
+    }
+]{thmbluebox}
+\declaretheorem[style=thmbluebox, numbered=no, name=Answer]{answer}
+
+\begin{document}
+\pagestyle{plain}
+\thispagestyle{empty}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+      \textbf{\class} & \textbf{Name:} & \textit{Pohan Lin}\\ %Your name here instead, obviously 
+      \textbf{\examnum} &&\\
+      \textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+% ---
+8.3: 1, 2, 3, 4, 5, 7
+
+\begin{enumerate}
+      \item \begin{enumerate}
+            \item Find the four primitive roots of 26 and the eight primitive roots of 25.
+            \begin{answer}
+
+            \end{answer}
+            \item Determine all the primitive roots of $3^2$, $3^3$, and $3^4$. 
+            \begin{answer}
+
+            \end{answer}
+      \end{enumerate}
+
+      \item For an odd prime p, establish the following facts:
+      \begin{enumerate}
+            \item There are as many primitive roots of $2p^n$ as of $p^n$.
+            \begin{answer}
+                  The number of primitive roots modulo $p^n$ is $\phi(\phi(p^n))$, and the number of primitive roots of $2p^n$ is $\phi(\phi(2p^n))$.
+                  \[
+                        \phi(\phi(2p^n)) = \phi(\phi(2)\phi(p^n))
+                  \]
+                  Since $\phi(2) = 1$
+                  \[
+                        \phi(\phi(2)\phi(p^n)) = \phi(\phi(p^n))
+                  \]
+                  Therefore the number of primitive roots modulo $p^n$ and $2p^n$ are the same.
+            \end{answer}
+            \item Any primitive root $r$ of $p^n$ is also a primitive root of $p$. \newline
+            [Hint: Let $r$ have order $k$  modulo $p$. Show that $r^{pk} \equiv 1 \pmod {p^2}, \dots, r^{p^{n-1}k} \equiv 1 \pmod {p^n}$ and, hence, $\phi(p^n) | p^{n-1}k$.] 
+            \begin{answer}
+                  Let $k$ be tje order of $r$ modulo $p$.
+                  \[
+                        r^k \equiv 1 \pmod p \Leftrightarrow r^k = mp + 1
+                  \]
+                  for some integer $n$.
+
+                  Then 
+                  \[
+                        r^{kp^j} \equiv {(mp + 1)}^{kp^j} \equiv {(1 + p^{j+1} m^j \dots)}^k \equiv 1 \pmod {p^{j+1}}
+                  \]
+                  For all integer $j \geq 1$, For $j = n$, we have
+                  \[
+                        r^{p^{n-1}k} \equiv 1 \pmod {p^n}
+                  \]
+
+                  Since $r$ is a primitive root, its order is $\phi(p^n)$ and so must divides $kp^{n-1}$
+                  \[
+                        \phi(p^n) = p^{n-1}(p-1) | p^{n-1}k
+                  \]
+
+                  Since $k$ is order of $r$ modulo $p$, $k \leq p-1$. Then we can conclude that it must be equal to $p - 1$,
+                  and so the order of $r$ modulo $p$ is $\phi(p) = p-1$.
+            \end{answer}
+            \item A primitive root of $p^2$ is also a primitive root of $p^n$ for $n \geq 2$. 
+            \begin{answer}
+                  Let $r$ be a primitive root modulo $p^2$. $r$ has order $\phi(p^2) = p(p-1) > p-1$.
+                  So
+                  \[
+                        r^{p-1} \not\equiv 1 \pmod {p^2}
+                  \]
+
+                  By the above part, we have that $r$ is a primitive root modulo $p$, such $r$ is also a primitive root modulo $p^n$
+                  for any power of $p$ with $n > 1$
+            \end{answer}
+      \end{enumerate}
+
+      \item If $r$ is a primitive root of $p^2$,  $p$ being an  odd prime, show that the  solutions of  the congruence
+      $x^{p-1} \equiv 1 \pmod {p^2}$ are precisely the integers $r^p,  r^{2p},  \dots ,  r^{(p-1)p}$. 
+      \begin{answer}
+            Since $r$ is a primitive root of $p^2$, we consider the following
+            \[
+                  x^{p-1} \equiv 1 \pmod {p^2}
+            \]
+
+            Let $h$ be the order of $x$ satisfying this congruence. $h$ must divides $p-1$. Since $r$ is a primitive root, $x$
+            can be expressed as $r^k$ for some $1 \leq k \leq p(p-1)$, the order of $r^k$ is 
+            \[
+                  h = \frac{\phi(p^2)}{\gcd(k, \phi(p^2))} = \frac{p(p-1)}{\gcd(k, p(p-1))}
+            \]
+
+            Since $h$ divides $p-1$, and $p$ doesn't divide $p-1$. We conclude that the denominator must have a factor of $p$.
+            This happend iff $k$ is a multiple of $p$.
+
+            We can conclude that any solution of the above euation must be in the form of $r^{mp}$ for some integer $1 \leq m \leq p-1$
+      \end{answer}
+
+      \item \begin{enumerate}
+            \item Prove that $3$ is a primitive root of all integers of the form $7k$ and $2 \cdot 7^k$.
+            \begin{answer}
+                  $r = 3$ is a primitive root of $p = 7$.
+                  \[
+                        3^{p-1} \equiv 3^6 \equiv 43 \not\equiv 1 \pmod{7^2}
+                  \]
+                  This shows that $3$ is a primitive root of $7^2$ aswell, further more, this in fact implies that 
+                  it is a primitive root of all powers of $7$.
+
+                  A primitive root of $7^n$ is a primitive root of $2\cdot7^n$ aswell if it's an odd number. And $3$ is an odd
+                  number, thus also a primitive root of $2\cdot7^n$
+            \end{answer}
+            \item Find a primitive root for any integer of the form $17^k$.
+            \begin{answer}
+                  A primitive root of $p = 17$ is given by $r = 3$
+                  \[
+                        3^{p-1} \equiv 3^{16} \equiv 171 \not\equiv 1 \pmod {17^2}
+                  \]
+
+                  This shows that $3$ is a primitive root of all powers of $17$.
+            \end{answer}
+      \end{enumerate}
+
+      \item Obtain all the primitive roots of 41 and 82. 
+      \begin{answer}
+            For 41:
+
+            We can find that 6 is a primitive root of 41. The primitive roots are given by the powers $6^k$ where $1 \leq k \leq \phi(41) = 40$ is
+            relativly prime to 6. There are $\phi(40) = 16$ of them
+            \[
+                  3^{1}, 3^{3}, 3^{7}, 3^{9}, 3^{11}, 3^{13}, 3^{17}, 3^{19} \dots
+            \]
+
+            And they are congruent to 
+            \[
+                  6, 11, 29, 19, 28, 24, 26, 34, 35, 30, 12, 22, 13, 17, 15, 7
+            \]
+
+
+            Since $82 = 2 \cdot 41$, $\phi(82) = \phi(41) = 40$ primitive roots of 82 are congruent to the above list but have to be odd.
+            Thus the primitive roots of 82 can be found by adding 41 to the even numbers of the list above.
+            \[
+                  47, 11, 29, 19, 69, 47, 75, 35, 71, 43, 53, 13, 17, 15, 7
+            \]
+
+      \end{answer}
+
+      \setcounter{enumi}{6}
+      \item Assume that $r$ is a primitive root of the odd prime $p$ and ${(r + tp)}^{p-1} \not\equiv 1 \pmod {p^2}$. 
+      Show that $r + tp$ is a primitive root of $p^k$ for each $k \geq 1$. 
+      \begin{answer}
+            Let the order of $r + tp$ modulo $p^2$ be $h$
+            \[
+                  {(r+tp)}^h \equiv 1 \pmod {p^2} \Rightarrow {(r+tp)}^h \equiv 1 \pmod {p}
+            \]
+
+            The order of $r + tp \equiv r \pmod p$ is $p-1$ since $r$ is a primitive root. Therefore
+            \[
+                  p - 1 | h
+            \]
+
+            Write $h$ as $(p-1) k$ for some integer $1 \leq k \leq p$. The only way this is posible is if either $k = 1$ or $k = p$.
+            Since $k = 1$ is excluded, we see that $k = p$ and $r + tp$ is a primitive root of $p^2$.
+
+            Since $p^2$ is a primitive root of every higher powers, we can conclude that $r + tp$ is a primitive root of all $p^k$
+      \end{answer}
+
+\end{enumerate}
+
+\end{document}
