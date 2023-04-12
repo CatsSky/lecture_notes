@@ -929,3 +929,81 @@ Prove that if $n = p$ is a prime, then primitive roots for $p$ exists.
     hence $\phi(p^k) = p^{k-1}(p-1) | d$, since $r$ is a primitive root of $p^k$.
     It follows that $d = p^{k-1}(p-1 = \phi(2p^k))$, therefore $r$ is a primitive root of $2p^k$.
 \end{proof}
+
+\section{Theory of Indecies}
+
+Let $n > 1$ be a integer.
+Suppose $n$ has a primitive root $r$.
+Let $\{a_1, a_2, \dots, a_{\phi(n)}\}$ be the set of positive integers less than 
+and relatively prime to $n$.
+
+Then $\{r, r^2, \dots, r^{\phi(n)}\} \pmod{n} = \{a_1, a_2, \dots, a_{\phi(n)}\}$
+Thus  for a given $a \in \{a_1, a_2, \dots, a_{\phi(n)}\}$ there exists
+a unique $1 \leq k \leq \phi(n)$ s.t. $r^k \equiv a \pmod n$
+
+\begin{eg}
+    $n = 5, r = 2, \{a_1, a_2, \dots, a_{\phi(n)}\} = \{1, 2, 3, 4\}$
+
+    $\Rightarrow \{2, 2^2, 2^3, 2^4\} \equiv \{2, 4, 3, 1\} \pmod n$
+
+    $a = 3 \Rightarrow  k = 3$
+
+    $a = 1 \Rightarrow  k = 4$
+\end{eg}
+
+\begin{definition}
+    Let $r$ be a primitive root of $n$. If $\gcd(a, n) = 1$,
+    then the smallest positive integer $k$ s.t. $a \equiv r^k \pmod n$ is 
+    called the \emph{index of $a$ relative to $r$}, denoted by $k = \ind_r a$
+\end{definition}
+
+\begin{eg}
+    $n=5, r=2$
+
+    $\ind_2 3 = 3, \ind_2 1 = 4, \ind_2 2 = 1, \ind_2 4 = 2$
+\end{eg}
+
+\begin{remark}
+    \hfill\break
+    \begin{enumerate}
+        \item The concept of index was introduced by Gauss.
+        \item By definition, $1 \leq \ind_r a \leq \phi(n)$ and $r^{\ind_r a} \equiv a \pmod n$
+        \item If $a \equiv b \pmod n$, then $\ind_r a = ind_r b$
+    \end{enumerate}
+\end{remark}
+
+\begin{theorem}
+    If $n$ has a primitive root $r$ and $a, b$ are integers with $\gcd(a, n) = \gcd(b, n) = 1$,
+    then the following properties hold.
+
+    \begin{enumerate}
+        \item $\ind_r(ab) \equiv \ind_r a + \ind_r b \pmod{\phi(n)}$
+        \item $ind_r a^k \equiv k \ind_r a \pmod{\phi(n)}$ for $k > 0$
+        \item $ind_r 1 \equiv 0 \pmod{\phi(n)}, ind_r r \equiv 1 \pmod{\phi(n)}$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}
+        \item By definition, $r^{\ind_r a} \equiv a \pmod n \& r^{\ind_r b} \equiv b \pmod n$,
+        therefore
+        \[
+            \begin{aligned}
+                ab &\equiv r^{\ind_r a} r^{\ind_r b} \\
+                &\equiv r^{\ind_r a + \ind_r b} \pmod n
+            \end{aligned}
+        \]
+
+        Since $r^{\ind_r ab} \equiv ab \pmod n$, we get $r^{\ind_r a + \ind_r b} \equiv r^{\ind_r ab} \pmod n$
+
+        This implies $\ind_r a + \ind_r b \equiv \ind_r ab \pmod{\phi(n)}$
+
+        \item We have 
+        \[
+            \begin{aligned}
+                &r^{\ind_r 1} \equiv a \pmod n\\
+                &\Rightarrow (r^{\ind_r a})^k \equiv a^k \pmod n\\
+                &\Rightarrow r^{k\ind_r a} \equiv a^k \pmod n\\
+            \end{aligned}
+        \]
+    \end{enumerate}
+\end{proof}
