@@ -1,3 +1,167 @@
 
 
 \chapter{THE QUADRATIC RECIPROCITY LAW}
+
+\section{Euler's Criterion}
+
+\setcounter{theorem}{0}
+
+Q. Let $p$ be and odd prime, $a, b, c \in \Z$ with $p \not \divides a$.
+When will the quadratic congruence 
+\[
+    \label{eq:9.1.1}
+    \tag{1}
+    ax^2 + bx + c \equiv 0 \pmod p
+\]
+has a solution?
+
+Let's try to simplify~\refeq{eq:9.1.1}. 
+Since $p \not \divides a$ and $p$ is an odd prime, we have
+$p \not \divides 4a$ and the equation~\refeq{eq:9.1.1} has a solution 
+if and only if 
+\[
+    \label{eq:9.1.2}
+    \tag{2}
+    4a(ax^2 + bx + c) \equiv 0 \pmod p
+\]
+has a solution.
+By using the identity
+\[
+    4a(ax^2 + bx + c) = {(2ax + b)}^2 - (b^2 - 4ac)
+\]
+The equation~\refeq{eq:9.1.2} becomes
+\[
+    \label{eq:9.1.3}
+    \tag{3}
+    {(2ax + b)}^2 \equiv (b^2 - 4ac) \pmod p
+\]
+Let $y = 2ax + b$ and $d = b^2 - 4ac$, equation~\refeq{eq:9.1.3} becomes 
+\[
+    \label{eq:9.1.4}
+    \tag{4}
+    y^2 \equiv d \pmod p
+\]
+Note that equation~\refeq{eq:9.1.1} is a solvable $\iff$ 
+equation~\refeq{eq:9.1.4} is solvable
+
+
+\bigbreak\hfill
+
+\subsection{Conclusion:}
+
+To solve quadratic congruences modulo an odd prime $p$, 
+it suffices to know how to solve the quadratic congruences of the form
+\[
+    \label{eq:9.1.5}
+    \tag{*}
+    x^2 \equiv a \pmod p
+\]
+for $a \in \Z$
+
+
+\begin{remark}
+    \begin{enumerate}
+        \item If $p \divides a$, then $x = p$ is an obvius solution of~\eqref{eq:9.1.5},
+        so we may assume $p \not \divides a$ in the followings
+        \item If~\eqref{eq:9.1.5} has a solution,
+        then it has two incongruence solutions modulo $p$.
+        Indeed, if $x_0$ is a solution of~\eqref{eq:9.1.5}, then $-x_0$ is also a solution.
+        Moreover, $x_0 \not\equiv -x_0 \pmod p$, since otherwise we have $2x_0 \equiv 0 \pmod p$,
+        i.e.
+        \[
+            \begin{aligned}
+                p \divides 2x_0 \Rightarrow p \divides x_0\\
+                \Rightarrow a \equiv x_0^2 \equiv 0 \pmod p
+            \end{aligned}
+        \]
+    \end{enumerate}
+\end{remark}
+
+
+\section{The Legendre Symbol and It's Properties}
+
+\begin{definition}
+    Let $p$ be an odd prime and $a$ be an integer with $\gcd(a, p) = 1$, 
+    the Legendre symbol
+    \[
+        (a/p) = \begin{cases}
+            1  &\text{if } a \text{ is a quadratic residue of }p\\
+            -1 &\text{if } a \text{ is a quadratic nonresidue of }p
+        \end{cases}
+    \]
+
+    In other words, $(a/p) = 1$ if $x^2 \equiv a \pmod p$ has a solution,
+    while $(a/p) = -1$ if $x^2 \equiv a \pmod p$ has no solution.
+
+    We shall refer to $a$ as a numerator and $p$ as the denominator of the symbol $(a/p)$
+\end{definition}
+
+\begin{remark}
+    Other standard notation for the Legendre symbol is
+    \[
+        (\frac{a}{p})
+    \]
+    and 
+    \[
+        (a \divides p)
+    \]
+\end{remark}
+
+\begin{eg}
+    Let $p = 13$, then the result of an easier example can be expressed as
+    \[
+        (1/13) = (3/13) = (4/13) = (9/13) = (10/13) = (12/13) = 1
+    \]
+    and
+    \[
+        (2/13) = (5/13) = (6/13) = (7/13) = (8/13) = (11/13) = -1
+    \]
+\end{eg}
+
+\begin{remark}
+    When $p \divides a$, the notation $(a/p)$ is undefined in this book. 
+    However, in some books, $(a/p)$ is defined to be $0$ if $p \divides a$.
+    One advantage of this is the number of solutions of $x^2 \equiv a \pmod p$
+    can be given by the formula $1 + (a/p)$
+\end{remark}
+
+\begin{theorem}
+    Let $p$ be an odd prime and $a, b$ be integers with $\gcd(a, p) = \gcd(b, p) = 1$.
+    Then we have 
+    \begin{enumerate}
+        \item If $a \equiv b \pmod p$, then $(a/p) = (b/p)$
+        \item $(a^2/p) = 1$
+        \item $a^{\frac{p-1}{2}} \equiv (a/p) \pmod p$
+        \item $(ab/p) = (a/p)(b/p)$
+        \item $(1/p) = 1$ and $(-1/p) = {(-1)}^{\frac{p-1}{2}}$
+    \end{enumerate}
+\end{theorem}
+
+\begin{remark}
+    By (2) and (4) in Theorem 2, we see that
+    \[
+        (ab^2/p) = (a/p)(b^2/p) = (a/p)
+    \]
+    In other words, a square factor that is relatively prime to $p$ can be deleted
+    from the numerator of Legendre symbol without affecting its value.
+\end{remark}
+
+
+\begin{corollary}
+    If $p$ is an odd prime, then 
+    \[
+        (-1/p) = \begin{cases}
+             1 &\text{if } p \equiv 1 \pmod 4\\
+            -1 &\text{if } p \equiv 3 \pmod 4
+        \end{cases}
+    \]
+\end{corollary}
+\begin{proof}
+    By (5) in Theorem 2, we have
+    \[
+        (-1/p) = {(-1)}^{\frac{p-1}{2}} = \begin{cases}
+             1 &\text{if } p \equiv 1 \pmod 4 \\
+            -1 &\text{if } p \equiv 3 \pmod 4
+        \end{cases}
+    \]
+\end{proof}
