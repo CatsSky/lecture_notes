@@ -1,0 +1,174 @@
+\documentclass[12pt]{exam}
+\usepackage{amsthm}
+\usepackage{libertine}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage{cleveref}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{siunitx}
+\usepackage{cancel}
+% \usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{tikz}
+% \usepackage[usenames,dvipsnames]{xcolor}
+
+
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+% \tikzexternalize
+
+\newcommand{\class}{Number Theory} % This is the name of the course 
+\newcommand{\examnum}{Homework 9.1} % This is the name of the assignment
+\newcommand{\examdate}{15 May. 2023} % This is the due date
+\newcommand{\timelimit}{}
+
+\makeatother
+\usepackage{thmtools}
+\usepackage[framemethod=tikz]{mdframed}
+\definecolor{NavyBlue}{RGB}{0, 0, 128}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{NavyBlue!70!black}, bodyfont=\normalfont,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=NavyBlue, backgroundcolor=NavyBlue!5,
+    }
+]{thmbluebox}
+\declaretheorem[style=thmbluebox, numbered=no, name=Answer]{answer}
+
+\begin{document}
+\pagestyle{plain}
+\thispagestyle{empty}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+      \textbf{\class} & \textbf{Name:} & \textit{Pohan Lin}\\ %Your name here instead, obviously 
+      \textbf{\examnum} &&\\
+      \textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+% ---
+9.1: 1, 2, 4, 6, 10, 12
+
+\begin{enumerate}
+
+    \item Solve the following quadratic congruences:
+    \begin{enumerate}
+        \item $x^2 + 7x + 10 \equiv 0 \pmod{11}$
+        \begin{answer}
+            \[  
+                x^2 + 7x + 10 \equiv 0 \pmod {11} \Leftrightarrow (x+5)(x+2) \equiv 0 \pmod {11}
+            \]
+            $x \equiv 9$ or $x \equiv 6$
+        \end{answer}
+
+        \item $3x^2 + 9x + 7 \equiv 0 \pmod{13}$
+            \begin{answer}
+                \[
+                    \begin{aligned}
+                        3x^2 + 9x + 7 \equiv 0 \pmod{13} \\
+                        36x^2 + 108x + 84 \equiv 0 \pmod{13} \\
+                        {(6x + 9)}^2 + 84 - 81 \equiv 0 \pmod{13} \\
+                        {(6x + 9)}^2 \equiv 10 \pmod{13} \\
+                        6x + 9 \equiv 6 \text{ or } 7\\
+                    \end{aligned}
+                \]
+                $x \equiv 6$ or $x \equiv 4$
+            \end{answer}
+        \item $5x^2 + 6x + 1 \equiv 0 \pmod{23}$
+            \begin{answer}
+                \[
+                    5x^2 + 6x + 1 \equiv 0 \pmod{23} \Leftrightarrow (5x+1)(x+1) \equiv 0 \pmod {23}
+                \]
+                $x \equiv 9$ or $x \equiv 22$
+            \end{answer}
+    \end{enumerate}
+    
+    \item Prove that the quadratic congruence $6x^2 + 5x + 1 \equiv 0 \pmod p$ has a solution for every
+    prime $p$, even though the equation $6x^2 + 5x + 1 = 0$ has no solution in the integers.
+
+        \begin{answer}
+            $6x^2 + 5x + 1 \equiv 0 \Rightarrow (3x + 1)(2x + 1) \equiv 0$
+            For $p = 2$ and $p = 3$, there exists one congruence, for $p \ge 5$ there are solutions for both
+            $(3x+1)$ and $(2x+1)$. In any case, there always exists solutions when $p$ is prime.
+        \end{answer}
+
+    \setcounter{enumi}{3}
+    \item Show that 3 is a quadratic residue of 23, but a nonresidue of 31.
+        \begin{answer}
+            $3^{\frac{23 - 1}{2}} \equiv 3^{11} \equiv 1 \pmod{23}$
+            3 is a quadratic residue of 23
+
+            $3^{\frac{31-1}{2}} \equiv 3^{15} \equiv -1 \pmod{31}$
+            3 is a non-residue of 31
+        \end{answer}
+    
+    \setcounter{enumi}{5}
+    \item Let $p$ be an odd prime and $\gcd(a, p) = 1$. Establish that the quadratic congruence
+    $ax^2 + bx + c = 0 \pmod p$ is solvable if and only if $b^2 - 4ac$ is either zero or a quadratic
+    residue of $p$.
+        \begin{answer}
+            multiply $ax^2 + bx + c = 0 \pmod p$ by $4a$
+            $4a^2x^2 + 4abx + 4ac - b^2 + b^2 = 0 \pmod p \Leftrightarrow {(2ax + b)}^2 \equiv b^2 -4ac \pmod p$ 
+            $b^2 -4ac$ must be zero or square number which is a quadratic residue.
+        \end{answer}
+
+    \setcounter{enumi}{9}
+    \item Let $p$ be an odd prime and $\gcd(a, p) = \gcd(b, p) = 1$. Prove that either all three of the
+    quadratic congruences.
+    \[
+        \begin{aligned}
+            x^2 =a \pmod p & x^2 = b \pmod p & x^2 = ab \pmod p
+        \end{aligned}
+    \]
+    are solvable or exactly one of them admits a solution.
+        \begin{answer}
+            If $x^2 \equiv a \pmod p$ is solvable iff $a^{\frac{p-1}{2}} \equiv 1 \pmod p$.
+
+            If $x^2 \equiv b \pmod p$ is solvable iff $b^{\frac{p-1}{2}} \equiv 1 \pmod p$.
+
+            If $x^2 \equiv ab \pmod p$ is solvable iff ${(ab)}^{\frac{p-1}{2}} \equiv 1 \pmod p$.
+
+            \begin{itemize}
+                \item If a and b are solvable, then ab must also be solvable.
+                \item If a and ab are solvable, then b must also be solvable.
+                \item If b and ab are solution, then a must also be solvable.
+                \item Assume that all are not solvable, then we have
+                $a^{\frac{p-1}{2}} \equiv b^{\frac{p-1}{2}} \equiv {(ab)}^{\frac{p-1}{2}} \equiv -1 \pmod p$
+                which is impossible.
+            \end{itemize}
+
+            Thus we conclude that there can't be two of them that are solvable since the third would also be solvable, and they can't be all non-solvable,
+            so there must be exactly one that is solvable.
+        \end{answer}
+
+    \setcounter{enumi}{11}
+    \item If $n > 2$ and $\gcd(a, n) = 1$, then $a$ is called a quadratic residue of $n$ whenever there exists
+    an integer $x$ such that $x^2 = a \pmod n$. Prove that if $a$ is a quadratic residue of $n > 2$,
+    then $a^{\phi(n)/2} = 1 \pmod n$
+        \begin{answer}
+            Suppose $a$ is a quadratic residue modulo $n$, then there exists $x$ s.t.
+            \[
+                x^2 \equiv a \pmod n
+            \]
+            That means $x^2 = k \cdot n + a$ for some integer $k$, also $x$ and $n$ cannot have a common divisor, that is $\gcd(x, n) = 0$.
+            Therefore we can apply Euler's Theorem
+            \[
+                \begin{aligned}
+                    a^{\frac{\phi(n)}{2}} &\equiv {(x^2)}^{\frac{\phi(n)}{2}} \\
+                    &\equiv x^{\phi(n)} \\
+                    &\equiv 1 \pmod n
+                \end{aligned}
+            \]
+        \end{answer}
+
+\end{enumerate}
+
+\end{document}

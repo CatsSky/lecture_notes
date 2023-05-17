@@ -1,0 +1,78 @@
+\documentclass[12pt]{exam}
+\usepackage{amsthm}
+\usepackage{libertine}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage{cleveref}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{siunitx}
+\usepackage{cancel}
+% \usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{tikz}
+% \usepackage[usenames,dvipsnames]{xcolor}
+
+
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+% \tikzexternalize
+
+\newcommand{\class}{Number Theory} % This is the name of the course 
+\newcommand{\examnum}{Homework 8.4} % This is the name of the assignment
+\newcommand{\examdate}{8 May. 2023} % This is the due date
+\newcommand{\timelimit}{}
+
+\makeatother
+\usepackage{thmtools}
+\usepackage[framemethod=tikz]{mdframed}
+\definecolor{NavyBlue}{RGB}{0, 0, 128}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{NavyBlue!70!black}, bodyfont=\normalfont,
+    mdframed={
+        linewidth=2pt,
+        rightline=false, topline=false, bottomline=false,
+        linecolor=NavyBlue, backgroundcolor=NavyBlue!5,
+    }
+]{thmbluebox}
+\declaretheorem[style=thmbluebox, numbered=no, name=Answer]{answer}
+
+\begin{document}
+\pagestyle{plain}
+\thispagestyle{empty}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+      \textbf{\class} & \textbf{Name:} & \textit{Pohan Lin}\\ %Your name here instead, obviously 
+      \textbf{\examnum} &&\\
+      \textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+% ---
+8.4: 1, 2, 3, 4, 5, 11, 12, 17
+
+\begin{enumerate}
+
+    \item Find the index of 5 relative to each of the primitive roots of 13.
+    \begin{answer}
+        
+    \end{answer}
+
+    \item Using a table of indices for a primitive root of 11, solve the following congruences:
+    \begin{enumerate}
+        \item $7x^3 \equiv 3 \pmod {11}$
+        \item $3x^4 \equiv 5 \pmod {11}$
+        \item $x^8 \equiv 10 \pmod {11}$
+    \end{enumerate}
+
+    
+
+\end{enumerate}
+
+\end{document}
