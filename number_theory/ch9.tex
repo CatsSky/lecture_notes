@@ -165,3 +165,44 @@ for $a \in \Z$
         \end{cases}
     \]
 \end{proof}
+
+\begin{theorem}
+    9.3
+    There are infinitely many primes of the form $4k + 1$
+\end{theorem}
+\begin{proof}
+    Suppose there are finitely many primes of the form $4k + 1$, say $p_1, p_2, \dots, p_n$.
+    Consider the integer $N = {(2p_1p_2 \cdots p_n)}^2 + 1$.
+    Since $N$ is odd, $N$ is divisible by an odd prime $p$.
+    This implies $N \equiv 0 \pmod p \Rightarrow {(2p_1p_2 \cdots p_n)}^2 \equiv -1 \pmod p$
+    $\Rightarrow -1$ is a quadratic residue of $p$.
+    
+    By cor, $p \equiv 1 \pmod 4$, i.e. $p$ is of the form $4k + 1$, have $p = p_j$ for some $j = 1, 2, \dots, n$.
+    But this gives 
+    \[
+        -1 \equiv {(2p_1p_2 \dots p_n)}^2 \equiv 0 \pmod p
+    \]
+
+    Thus there are infinitely many primes of the form $4k + 1$
+\end{proof}
+
+
+\begin{theorem}
+    9.5 Gauss' lemma
+
+    Let $p$ be an odd prime and $p \not\divides a$.
+    If $n$ denotes the number of integers in the set $S = \{a, 2, \dots, (\frac{p-1}{2})a\}$,
+    whose remainders upon division by $p$ exceed $\frac{p}{2}$, then $(a / p) = {(-1)}^n$
+\end{theorem}
+
+\begin{theorem}
+    9.6
+
+    if $p$ is an odd prime, then 
+    \[
+        (2/p) = \begin{cases}
+            1  & \text{ if } p \equiv 1 \pmod 8 \text{ or } p \equiv 7 \pmod 8 \\
+            -1 & \text{ if } p \equiv 3 \pmod 8 \text{ or } p \equiv 5 \pmod 8
+        \end{cases}
+    \]
+\end{theorem}
